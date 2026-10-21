@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="gu">
 <head>
@@ -110,10 +110,12 @@
                 </div>
 
                 <!-- School Meta & Current Date -->
-                <div class="hidden md:flex flex-col text-right">
-                    <span id="schoolDisplayName" class="font-bold text-amber-300 text-sm">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</span>
-                    <span class="text-xs text-slate-300">U-DISE: 24070500101 | <span id="currentDateGujarati"></span></span>
-                </div>
+        <div class="hidden md:flex flex-col text-right">
+            <span id="schoolDisplayName" class="font-bold text-amber-300 text-sm">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</span>
+            <span class="text-xs text-slate-300">U-DISE: <span id="headerUdiseCode">24070500101</span> | <span id="currentDateGujarati"></span></span>
+        </div>
+    </div>
+</div>
             </div>
         </div>
 
@@ -167,8 +169,11 @@
                     </p>
                 </div>
                 <div class="flex flex-wrap gap-3 z-10">
+                    <button onclick="openModal('editSchoolModal')" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-2 text-sm border border-indigo-400/40">
+                        <i class="fa-solid fa-pen-to-square text-amber-300"></i> શાળા પ્રોફાઇલ સુધારો
+                    </button>
                     <button onclick="openModal('addStudentModal')" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-2 text-sm">
-                        <i class="fa-solid fa-user-plus"></i> નવો વિદ્યાર્થી દાખલ કરો
+                        <i class="fa-solid fa-user-plus"></i> નવો વિદ્યાર્થી
                     </button>
                     <button onclick="switchTab('lcGenerator')" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2 text-sm backdrop-blur-sm">
                         <i class="fa-solid fa-print"></i> L.C. પ્રિન્ટ
@@ -176,6 +181,51 @@
                 </div>
                 <!-- Background decoration icon -->
                 <i class="fa-solid fa-graduation-cap absolute -right-6 -bottom-6 text-9xl text-white/5 pointer-events-none"></i>
+            </div>
+
+            <!-- School Profile Interactive Overview Card -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 relative overflow-hidden">
+                <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 border-b border-slate-100 gap-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-700 to-indigo-600 text-white flex items-center justify-center text-xl shadow-md">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full uppercase">શાળા પ્રોફાઇલ & વહીવટી વિગતો</span>
+                            <h3 id="cardSchoolTitle" class="text-xl font-bold text-slate-900 mt-0.5">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</h3>
+                        </div>
+                    </div>
+                    <button onclick="openModal('editSchoolModal')" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-700 rounded-xl text-xs font-bold transition border border-slate-200">
+                        <i class="fa-solid fa-pen-to-square"></i> માહિતી સંપાદિત કરો (Edit)
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 pt-4 text-xs">
+                    <div class="p-3 bg-slate-50/70 rounded-2xl border border-slate-100">
+                        <span class="text-slate-400 block font-medium">U-DISE કોડ / ID</span>
+                        <strong id="cardUdise" class="text-slate-900 text-sm font-mono block mt-0.5">24070500101</strong>
+                    </div>
+                    <div class="p-3 bg-slate-50/70 rounded-2xl border border-slate-100">
+                        <span class="text-slate-400 block font-medium">પે સેન્ટર / CRC</span>
+                        <strong id="cardCrc" class="text-slate-900 text-sm block mt-0.5">કેન્દ્રશાળા ધંધુકા</strong>
+                    </div>
+                    <div class="p-3 bg-slate-50/70 rounded-2xl border border-slate-100">
+                        <span class="text-slate-400 block font-medium">તાલુકો</span>
+                        <strong id="cardTaluka" class="text-slate-900 text-sm block mt-0.5">ધંધુકા</strong>
+                    </div>
+                    <div class="p-3 bg-slate-50/70 rounded-2xl border border-slate-100">
+                        <span class="text-slate-400 block font-medium">જિલ્લો</span>
+                        <strong id="cardDistrict" class="text-slate-900 text-sm block mt-0.5">અમદાવાદ</strong>
+                    </div>
+                    <div class="p-3 bg-slate-50/70 rounded-2xl border border-slate-100">
+                        <span class="text-slate-400 block font-medium">આચાર્યશ્રીનું નામ</span>
+                        <strong id="cardPrincipal" class="text-slate-900 text-sm block mt-0.5">પટેલ હિતેશકુમાર એમ.</strong>
+                    </div>
+                    <div class="p-3 bg-slate-50/70 rounded-2xl border border-slate-100">
+                        <span class="text-slate-400 block font-medium">સંપર્ક / મોબાઇલ</span>
+                        <strong id="cardPhone" class="text-slate-900 text-sm font-mono block mt-0.5">9876543210</strong>
+                    </div>
+                </div>
             </div>
 
             <!-- Stats Overview Cards -->
@@ -403,9 +453,9 @@
                     <!-- Header -->
                     <div class="text-center pb-4 border-b-2 border-slate-800">
                         <div class="text-xs font-bold tracking-widest text-slate-600 uppercase">પરિશિષ્ટ - ૪ (નિયમ ૨૪ મુજબ)</div>
-                        <h2 class="text-2xl md:text-3xl font-extrabold mt-1 text-slate-900">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</h2>
-                        <p class="text-sm font-semibold text-slate-700">તાલુકો: ધંધૂકા, જિલ્લો: અમદાવાદ | પિન કોડ: ૩૮૨૪૬૦</p>
-                        <p class="text-xs font-medium text-slate-600 mt-1">શાળા માન્યતા ક્રમાંક: પ્રા.શિક્ષણ/અમદ/૨૦૧૨/૩૪૧૨ | U-DISE કોડ: 24070500101</p>
+                        <h2 id="lcPrintSchoolName" class="text-2xl md:text-3xl font-extrabold mt-1 text-slate-900">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</h2>
+                        <p class="text-sm font-semibold text-slate-700">તાલુકો: <span id="lcPrintTaluka">ધંધૂકા</span>, જિલ્લો: <span id="lcPrintDistrict">અમદાવાદ</span> | પિન કોડ: <span id="lcPrintPincode">૩૮૨૪૬૦</span></p>
+                        <p class="text-xs font-medium text-slate-600 mt-1">શાળા માન્યતા ક્રમાંક: <span id="lcPrintRecognition">પ્રા.શિક્ષણ/અમદ/૨૦૧૨/૩૪૧૨</span> | U-DISE કોડ: <span id="lcPrintUdise" class="font-mono">24070500101</span></p>
                         <div class="inline-block mt-3 px-6 py-1 bg-slate-900 text-white font-bold text-base md:text-lg tracking-wide rounded">
                             શાળા છોડ્યાનું પ્રમાણપત્ર (SCHOOL LEAVING CERTIFICATE)
                         </div>
@@ -555,8 +605,8 @@
             <!-- Printable Student Progress Report Card -->
             <div class="bg-white rounded-2xl border border-slate-300 shadow-lg p-6 max-w-4xl mx-auto printable-sheet text-slate-900">
                 <div class="text-center border-b-2 border-slate-800 pb-3 mb-4">
-                    <h3 class="text-xl md:text-2xl font-bold text-slate-900">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</h3>
-                    <p class="text-xs text-slate-600">જિલ્લા પંચાયત શિક્ષણ સમિતિ, અમદાવાદ | U-DISE: 24070500101</p>
+                    <h3 id="marksheetPrintSchoolName" class="text-xl md:text-2xl font-bold text-slate-900">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</h3>
+                    <p class="text-xs text-slate-600">જિલ્લા પંચાયત શિક્ષણ સમિતિ, <span id="marksheetPrintDistrict">અમદાવાદ</span> | U-DISE: <span id="marksheetPrintUdise" class="font-mono">24070500101</span></p>
                     <div class="inline-block mt-2 px-4 py-0.5 bg-slate-900 text-amber-300 font-bold text-sm rounded">
                         વિદ્યાર્થી વાર્ષિક પ્રગતિ પત્રક (PROGRESS REPORT CARD) - સત્ર ૨૦૨૬-૨૭
                     </div>
@@ -838,6 +888,86 @@
 
 
     <!-- ======================= MODALS ======================= -->
+
+    <!-- 0. Edit School Profile Modal -->
+    <div id="editSchoolModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden no-print backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                    <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-school"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">શાળા પ્રોફાઇલ અને વહીવટી વિગતો</h3>
+                        <p class="text-xs text-slate-500">આ માહિતી બદલવાથી સમગ્ર પોર્ટલ, L.C., ગુણપત્રક અને પત્રોમાં આપમેળે અપડેટ થશે.</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('editSchoolModal')" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+            </div>
+
+            <form id="schoolProfileForm" onsubmit="handleSaveSchoolProfile(event)" class="space-y-4 text-sm">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">શાળાનું સત્તાવાર પૂરું નામ *</label>
+                    <input type="text" id="schoolInputName" required placeholder="દા.ત. શ્રી પે સેન્ટર પ્રાથમિક શાળા" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">શાળા U-DISE કોડ / સ્કૂલ ID * (11 અંક)</label>
+                        <input type="text" id="schoolInputUdise" maxlength="11" required placeholder="દા.ત. 24070500101" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">પે સેન્ટર / સી.આર.સી. (CRC)</label>
+                        <input type="text" id="schoolInputCrc" placeholder="દા.ત. કેન્દ્રશાળા ધંધુકા" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">તાલુકો *</label>
+                        <input type="text" id="schoolInputTaluka" required placeholder="દા.ત. ધંધુકા" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">જિલ્લો *</label>
+                        <input type="text" id="schoolInputDistrict" required placeholder="દા.ત. અમદાવાદ" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">પિન કોડ</label>
+                        <input type="text" id="schoolInputPincode" placeholder="દા.ત. 382460" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 font-mono">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">આચાર્યશ્રીનું પૂરું નામ *</label>
+                        <input type="text" id="schoolInputPrincipal" required placeholder="દા.ત. પટેલ હિતેશકુમાર એમ." class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">સંપર્ક / મોબાઈલ નંબર</label>
+                        <input type="text" id="schoolInputPhone" placeholder="દા.ત. 9876543210" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 font-mono">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">શાળા માન્યતા ક્રમાંક (Recognition No.)</label>
+                        <input type="text" id="schoolInputRecognition" placeholder="દા.ત. પ્રા.શિક્ષણ/અમદ/૨૦૧૨/૩૪૧૨" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">શાળા ઇમેઇલ (School Email)</label>
+                        <input type="email" id="schoolInputEmail" placeholder="દા.ત. school@gujaratgov.edu.in" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3 border-t border-slate-200">
+                    <button type="button" onclick="closeModal('editSchoolModal')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-xl transition">રદ કરો</button>
+                    <button type="submit" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition shadow flex items-center gap-1.5">
+                        <i class="fa-solid fa-floppy-disk"></i> ફેરફારો સાચવો (Save)
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- 1. Add Student Modal -->
     <div id="addStudentModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden no-print backdrop-blur-sm">
@@ -1237,6 +1367,20 @@
             { teacher: "શાહ વિવેકકુમાર કે. (સહશિક્ષક)", role: "સહશિક્ષક", type: "H.P.L. (અર્ધપગારી)", date: "૧૨/૧૦/૨૦૨૬", days: 2, reason: "તબિયત અસ્વસ્થ હોવાથી", status: "મંજૂર" }
         ];
 
+        // Configurable School Profile (Saved in LocalStorage)
+        let schoolProfile = {
+            name: "શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા",
+            udise: "24070500101",
+            crc: "કેન્દ્રશાળા ધંધુકા",
+            taluka: "ધંધુકા",
+            district: "અમદાવાદ",
+            pincode: "૩૮૨૪૬૦",
+            principal: "પટેલ હિતેશકુમાર એમ.",
+            phone: "9876543210",
+            recognition: "પ્રા.શિક્ષણ/અમદ/૨૦૧૨/૩૪૧૨",
+            email: "pri.dhandhuka@gujaratgov.edu.in"
+        };
+
         let grantTransactions = [
             { date: "2026-06-15", voucher: "IN-01", head: "SSA કમ્પોઝિટ ગ્રાન્ટ", desc: "વાર્ષિક શાળા ગ્રાન્ટ જમા", income: 25000, expense: 0, balance: 25000 },
             { date: "2026-07-10", voucher: "V-26/01", head: "SSA કમ્પોઝિટ ગ્રાન્ટ", desc: "વર્ગખંડ રંગકામ અને પ્રાથમિક રિપેરિંગ", income: 0, expense: 6200, balance: 18800 },
@@ -1249,6 +1393,9 @@
         // LocalStorage Sync
         function loadStorage() {
             try {
+                const sp = localStorage.getItem('sarathi_school_profile');
+                if (sp) schoolProfile = { ...schoolProfile, ...JSON.parse(sp) };
+
                 const s = localStorage.getItem('sarathi_students');
                 if (s) students = JSON.parse(s);
 
@@ -1264,12 +1411,93 @@
 
         function saveStorage() {
             try {
+                localStorage.setItem('sarathi_school_profile', JSON.stringify(schoolProfile));
                 localStorage.setItem('sarathi_students', JSON.stringify(students));
                 localStorage.setItem('sarathi_diaries', JSON.stringify(diaryList));
                 localStorage.setItem('sarathi_grants', JSON.stringify(grantTransactions));
             } catch(e) {
                 console.warn("Storage save warning:", e);
             }
+        }
+
+        // Apply School Profile Everywhere
+        function applySchoolProfile() {
+            // Header
+            const schoolDisplayName = document.getElementById('schoolDisplayName');
+            if (schoolDisplayName) schoolDisplayName.innerText = schoolProfile.name;
+            const headerUdiseCode = document.getElementById('headerUdiseCode');
+            if (headerUdiseCode) headerUdiseCode.innerText = schoolProfile.udise;
+
+            // Dashboard Card
+            const cardSchoolTitle = document.getElementById('cardSchoolTitle');
+            if (cardSchoolTitle) cardSchoolTitle.innerText = schoolProfile.name;
+            const cardUdise = document.getElementById('cardUdise');
+            if (cardUdise) cardUdise.innerText = schoolProfile.udise;
+            const cardCrc = document.getElementById('cardCrc');
+            if (cardCrc) cardCrc.innerText = schoolProfile.crc;
+            const cardTaluka = document.getElementById('cardTaluka');
+            if (cardTaluka) cardTaluka.innerText = schoolProfile.taluka;
+            const cardDistrict = document.getElementById('cardDistrict');
+            if (cardDistrict) cardDistrict.innerText = schoolProfile.district;
+            const cardPrincipal = document.getElementById('cardPrincipal');
+            if (cardPrincipal) cardPrincipal.innerText = schoolProfile.principal;
+            const cardPhone = document.getElementById('cardPhone');
+            if (cardPhone) cardPhone.innerText = schoolProfile.phone;
+
+            // L.C. Sheet
+            const lcPrintSchoolName = document.getElementById('lcPrintSchoolName');
+            if (lcPrintSchoolName) lcPrintSchoolName.innerText = schoolProfile.name;
+            const lcPrintTaluka = document.getElementById('lcPrintTaluka');
+            if (lcPrintTaluka) lcPrintTaluka.innerText = schoolProfile.taluka;
+            const lcPrintDistrict = document.getElementById('lcPrintDistrict');
+            if (lcPrintDistrict) lcPrintDistrict.innerText = schoolProfile.district;
+            const lcPrintPincode = document.getElementById('lcPrintPincode');
+            if (lcPrintPincode) lcPrintPincode.innerText = schoolProfile.pincode;
+            const lcPrintRecognition = document.getElementById('lcPrintRecognition');
+            if (lcPrintRecognition) lcPrintRecognition.innerText = schoolProfile.recognition;
+            const lcPrintUdise = document.getElementById('lcPrintUdise');
+            if (lcPrintUdise) lcPrintUdise.innerText = schoolProfile.udise;
+
+            // Marksheet
+            const marksheetPrintSchoolName = document.getElementById('marksheetPrintSchoolName');
+            if (marksheetPrintSchoolName) marksheetPrintSchoolName.innerText = schoolProfile.name;
+            const marksheetPrintDistrict = document.getElementById('marksheetPrintDistrict');
+            if (marksheetPrintDistrict) marksheetPrintDistrict.innerText = schoolProfile.district;
+            const marksheetPrintUdise = document.getElementById('marksheetPrintUdise');
+            if (marksheetPrintUdise) marksheetPrintUdise.innerText = schoolProfile.udise;
+
+            // Populate Edit Form Inputs
+            document.getElementById('schoolInputName').value = schoolProfile.name || '';
+            document.getElementById('schoolInputUdise').value = schoolProfile.udise || '';
+            document.getElementById('schoolInputCrc').value = schoolProfile.crc || '';
+            document.getElementById('schoolInputTaluka').value = schoolProfile.taluka || '';
+            document.getElementById('schoolInputDistrict').value = schoolProfile.district || '';
+            document.getElementById('schoolInputPincode').value = schoolProfile.pincode || '';
+            document.getElementById('schoolInputPrincipal').value = schoolProfile.principal || '';
+            document.getElementById('schoolInputPhone').value = schoolProfile.phone || '';
+            document.getElementById('schoolInputRecognition').value = schoolProfile.recognition || '';
+            document.getElementById('schoolInputEmail').value = schoolProfile.email || '';
+        }
+
+        function handleSaveSchoolProfile(e) {
+            e.preventDefault();
+            schoolProfile = {
+                name: document.getElementById('schoolInputName').value.trim(),
+                udise: document.getElementById('schoolInputUdise').value.trim(),
+                crc: document.getElementById('schoolInputCrc').value.trim(),
+                taluka: document.getElementById('schoolInputTaluka').value.trim(),
+                district: document.getElementById('schoolInputDistrict').value.trim(),
+                pincode: document.getElementById('schoolInputPincode').value.trim(),
+                principal: document.getElementById('schoolInputPrincipal').value.trim(),
+                phone: document.getElementById('schoolInputPhone').value.trim(),
+                recognition: document.getElementById('schoolInputRecognition').value.trim(),
+                email: document.getElementById('schoolInputEmail').value.trim()
+            };
+
+            saveStorage();
+            applySchoolProfile();
+            closeModal('editSchoolModal');
+            showMessage("શાળા પ્રોફાઇલ સફળતાપૂર્વક અપડેટ થઈ ગઈ!");
         }
 
         // Tab Switching
@@ -1703,10 +1931,16 @@
         }
 
         // ======================= MODULE 7: AI & DRAFTING =======================
-        const draftTemplates = {
-            smc: `<strong>શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</strong><br>
+        function getDraftTemplate(type) {
+            const schName = schoolProfile.name;
+            const schTaluka = schoolProfile.taluka;
+            const schDist = schoolProfile.district;
+            const schUdise = schoolProfile.udise;
+
+            const templates = {
+                smc: `<strong>${schName}</strong><br>
 <strong>શાળા વ્યવસ્થાપન સમિતિ (SMC) માસિક બેઠક ઠરાવ નકલ</strong><br><br>
-આજ રોજ તારીખ: ૨૫/૧૦/૨૦૨૬ ના દિને શાળા પરિસરમાં SMC અધ્યક્ષશ્રીની અધ્યક્ષતામાં અને આચાર્યશ્રીની ઉપસ્થિતિમાં માસિક સમીક્ષા બેઠક યોજવામાં આવી.<br><br>
+આજ રોજ તારીખ: ૨૫/૧૦/૨૦૨૬ ના દિને શાળા પરિસરમાં SMC અધ્યક્ષશ્રીની અધ્યક્ષતામાં અને આચાર્યશ્રી ${schoolProfile.principal} ની ઉપસ્થિતિમાં માસિક સમીક્ષા બેઠક યોજવામાં આવી.<br><br>
 <strong>ઠરાવ ક્રમાંક ૧:</strong> ગત માસની કાર્યવાહી અને શૈક્ષણિક પ્રગતિની સમીક્ષા કરી સર્વાનુમતે બહાલી આપવામાં આવી.<br>
 <strong>ઠરાવ ક્રમાંક ૨:</strong> સમગ્ર શિક્ષા અભિયાન (SSA) કમ્પોઝિટ ગ્રાન્ટમાંથી શાળાના વર્ગખંડોમાં વ્હાઇટ બોર્ડ અને શૈક્ષણિક ચાર્ટ્સ વસાવવા અંગે સર્વાનુમતે મંજૂરી આપવામાં આવી.<br>
 <strong>ઠરાવ ક્રમાંક ૩:</strong> નબળા વિદ્યાર્થીઓ માટે ગણિત-વાંચનમાં દૈનિક ૩૦ મિનિટ ઉપચારાત્મક શિક્ષણ સત્ર શરૂ કરવાનું નક્કી કરાયું.<br><br>
@@ -1715,41 +1949,44 @@
 ૨. આચાર્ય / સચિવશ્રી: ____________________<br>
 ૩. સભ્યશ્રી (વાલી પ્રતિનિધિ): ____________________`,
 
-            bonafide: `<strong>શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</strong><br>
-તા. ધંધૂકા, જિ. અમદાવાદ | U-DISE કોડ: 24070500101<br><br>
+                bonafide: `<strong>${schName}</strong><br>
+તા. ${schTaluka}, જિ. ${schDist} | U-DISE કોડ: ${schUdise}<br><br>
 <center><strong><u>બોનાફાઇડ સર્ટિફિકેટ (BONAFIDE CERTIFICATE)</u></strong></center><br>
 પ્રમાણિત કરવામાં આવે છે કે કુમાર/કન્યા <strong>પટેલ પ્રિયાંશુ મહેશભાઈ</strong>, જનરલ રજિસ્ટર (G.R.) નંબર <strong>૧૪૦૨</strong> થી અમારી શાળામાં ચાલુ શૈક્ષણિક વર્ષ ૨૦૨૬-૨૭ માં <strong>ધોરણ ૬ (છ)</strong> માં નિયમિત અભ્યાસ કરે છે.<br><br>
 તેમની શાળા રેકોર્ડ મુજબ જન્મતારીખ <strong>૧૨/૦૬/૨૦૧૫ (બારમી જૂન બે હજાર પંદર)</strong> છે.<br>
 શાળામાં તેમની વર્તણૂક ઘણી સારી છે. આ પ્રમાણપત્ર વાલીની વિનંતીથી સરકારી યોજના / શિષ્યવૃત્તિ અર્થે કાઢી આપવામાં આવેલ છે.<br><br>
 તારીખ: ૨૧/૧૦/૨૦૨૬<br>
-સ્થળ: ધંધૂકા<br><br>
+સ્થળ: ${schTaluka}<br><br>
 <div style="text-align: right; margin-top: 25px;">
-    <strong>આચાર્યશ્રીની સહી અને સિક્કો</strong>
+    <strong>આચાર્યશ્રી (${schoolProfile.principal}) ની સહી અને સિક્કો</strong>
 </div>`,
 
-            tour: `પ્રતિ,<br>
+                tour: `પ્રતિ,<br>
 તાલુકા પ્રાથમિક શિક્ષણાધિકારીશ્રી (TPEO),<br>
-તાલુકા પંચાયત કચેરી, ધંધૂકા.<br><br>
+તાલુકા પંચાયત કચેરી, ${schTaluka}.<br><br>
 <strong>વિષય:</strong> એક-દિવસીય શૈક્ષણિક પ્રવાસ મંજૂરી બાબત.<br><br>
 માનનીય સાહેબશ્રી,<br>
-સવિનય જણાવવાનું કે અમારી શાળાના ધોરણ ૬ થી ૮ ના કુલ ૫૦ વિદ્યાર્થીઓ માટે શૈક્ષણિક હેતુસર આગામી તારીખ <strong>૧૫/૧૧/૨૦૨૬</strong> ના રોજ 'ગુજરાત સાયન્સ સિટી અને લોથલ હડપ્પીય સંસ્કૃતિ સંગ્રહાલય' ખાતે એક-દિવસીય શૈક્ષણિક પ્રવાસનું આયોજન કરવામાં આવેલ છે.<br><br>
+સવિનય જણાવવાનું કે અમારી શાળા ${schName} ના ધોરણ ૬ થી ૮ ના કુલ ૫૦ વિદ્યાર્થીઓ માટે શૈક્ષણિક હેતુસર આગામી તારીખ <strong>૧૫/૧૧/૨૦૨૬</strong> ના રોજ 'ગુજરાત સાયન્સ સિટી અને લોથલ હડપ્પીય સંસ્કૃતિ સંગ્રહાલય' ખાતે એક-દિવસીય શૈક્ષણિક પ્રવાસનું આયોજન કરવામાં આવેલ છે.<br><br>
 પ્રવાસમાં ભાગ લેનાર તમામ વિદ્યાર્થીઓના વાલીઓના સંમતિપત્રો મેળવેલ છે તેમજ શાળાના ૪ શિક્ષકો માર્ગદર્શક તરીકે ઉપસ્થિત રહેશે. તો આ પ્રવાસ માટે નિયમાનુસાર વહીવટી મંજૂરી આપવા નમ્ર વિનંતી છે.<br><br>
 આપનો વિશ્વાસુ,<br>
-<strong>આચાર્યશ્રી, શ્રી તાલુકા પ્રાથમિક શાળા</strong>`,
+<strong>આચાર્યશ્રી, ${schName}</strong>`,
 
-            leaveApp: `પ્રતિ,<br>
+                leaveApp: `પ્રતિ,<br>
 માનનીય આચાર્યશ્રી,<br>
-શ્રી તાલુકા પ્રાથમિક શાળા, ધંધૂકા.<br><br>
+${schName}, ${schTaluka}.<br><br>
 <strong>વિષય:</strong> કેઝ્યુઅલ લીવ (C.L.) મંજૂર કરવા બાબત.<br><br>
 માનનીય સાહેબશ્રી,<br>
 સવિનય જણાવવાનું કે મારે આગામી તારીખ <strong>૨૪/૧૦/૨૦૨૬</strong> ના રોજ પરિવારમાં સામાજિક પ્રસંગ હોવાથી શાળા સમય દરમિયાન ઉપસ્થિત રહી શકાય તેમ નથી. માટે મારી ૧ (એક) દિવસની C.L. રજા મંજૂર કરવા વિનંતી છે.<br><br>
 મારા વર્ગનું શૈક્ષણિક કાર્ય અન્ય સહશિક્ષકશ્રીને સોંપવામાં આવેલ છે.<br><br>
 આપનો સહકર્મચારી,<br>
 <strong>શાહ વિવેકકુમાર કે. (સહશિક્ષક)</strong>`
-        };
+            };
+
+            return templates[type] || "";
+        }
 
         function applyDraftTemplate(type) {
-            document.getElementById('draftDocumentEditor').innerHTML = draftTemplates[type] || "";
+            document.getElementById('draftDocumentEditor').innerHTML = getDraftTemplate(type);
         }
 
         async function generateLetterWithGemini() {
@@ -1956,6 +2193,7 @@
         // App Initializer
         window.onload = function() {
             loadStorage();
+            applySchoolProfile();
             renderStudentsTable();
             updateDashboard();
             applyDraftTemplate('smc');
