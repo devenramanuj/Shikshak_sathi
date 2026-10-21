@@ -1,0 +1,326 @@
+```html
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>શૈક્ષણિક સારથી - ગુજરાતી પ્રાથમિક શાળા શિક્ષક અને આચાર્ય પોર્ટલ</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for School & Office Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Sans Gujarati & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        gujarati: ['"Noto Sans Gujarati"', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', '"Noto Sans Gujarati"', 'sans-serif']
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#1d4ed8',
+                            600: '#1e40af',
+                            700: '#1e3a8a',
+                            800: '#172554',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans Gujarati', 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        /* Official Printing Rules */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            .printable-sheet {
+                border: 2px solid #000 !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                width: 100% !important;
+                padding: 1.5rem !important;
+                page-break-after: always;
+            }
+        }
+        .print-only {
+            display: none;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Top State Ribbon -->
+    <div class="bg-gradient-to-r from-amber-500 via-white to-emerald-600 h-1.5 w-full no-print"></div>
+
+    <!-- Header / Navbar -->
+    <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-40 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Branding -->
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="bg-amber-400 text-slate-950 p-2.5 rounded-xl shadow-md flex items-center justify-center font-bold text-2xl">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[11px] bg-amber-400 text-slate-950 font-bold px-2 py-0.5 rounded tracking-wide">ગુજરાત પ્રાથમિક શિક્ષણ</span>
+                            <span class="text-xs text-slate-400 font-mono">સત્ર ૨૦૨૬-૨૭</span>
+                        </div>
+                        <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                            શૈક્ષણિક સારથી <span class="text-xs font-normal text-amber-200 hidden sm:inline">| શિક્ષક & આચાર્ય પોર્ટલ</span>
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- School Meta & Current Date -->
+                <div class="hidden md:flex flex-col text-right">
+                    <span id="schoolDisplayName" class="font-bold text-amber-300 text-sm">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</span>
+                    <span class="text-xs text-slate-300">U-DISE: 24070500101 | <span id="currentDateGujarati"></span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs (8 Modules) -->
+        <div class="bg-slate-800 border-t border-slate-700">
+            <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto py-2 scrollbar-none" id="mainNavbar">
+                    <button onclick="switchTab('dashboard')" class="nav-tab active-tab px-3 py-2 rounded-lg text-xs md:text-sm font-semibold transition flex items-center gap-1.5 whitespace-nowrap bg-blue-600 text-white shadow">
+                        <i class="fa-solid fa-gauge-high"></i> ડેશબોર્ડ
+                    </button>
+                    <button onclick="switchTab('grRegister')" class="nav-tab px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:text-white hover:bg-slate-700">
+                        <i class="fa-solid fa-address-book"></i> G.R. રજિસ્ટર
+                    </button>
+                    <button onclick="switchTab('lcGenerator')" class="nav-tab px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:text-white hover:bg-slate-700">
+                        <i class="fa-solid fa-certificate"></i> L.C. જનરેટર
+                    </button>
+                    <button onclick="switchTab('sceMarksheet')" class="nav-tab px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:text-white hover:bg-slate-700">
+                        <i class="fa-solid fa-file-invoice"></i> SCE ગુણપત્રક
+                    </button>
+                    <button onclick="switchTab('teacherDiary')" class="nav-tab px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:text-white hover:bg-slate-700">
+                        <i class="fa-solid fa-book-open-reader"></i> શિક્ષક ડાયરી
+                    </button>
+                    <button onclick="switchTab('staffLeave')" class="nav-tab px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:text-white hover:bg-slate-700">
+                        <i class="fa-solid fa-calendar-check"></i> રજા રજિસ્ટર
+                    </button>
+                    <button onclick="switchTab('aiDrafter')" class="nav-tab px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:text-white hover:bg-slate-700">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> SMC / પત્ર ડ્રાફ્ટર
+                    </button>
+                    <button onclick="switchTab('grantLedger')" class="nav-tab px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition flex items-center gap-1.5 whitespace-nowrap text-slate-300 hover:text-white hover:bg-slate-700">
+                        <i class="fa-solid fa-wallet text-emerald-400"></i> શાળા ગ્રાન્ટ & હિસાબ
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ======================= 1. DASHBOARD ======================= -->
+        <section id="tab-dashboard" class="tab-content space-y-6">
+            <!-- Welcome Hero Banner -->
+            <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white rounded-3xl p-6 md:p-8 shadow-md relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div class="space-y-2 z-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-400 text-slate-950 text-xs font-bold rounded-full">
+                        <i class="fa-solid fa-school"></i> શૈક્ષણિક સત્ર ૨૦૨૬-૨૭ ચાલુ
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">નમસ્કાર, આચાર્યશ્રી / શિક્ષક મિત્રો!</h2>
+                    <p class="text-blue-100 text-sm max-w-2xl leading-relaxed">
+                        ગુજરાત પ્રાથમિક શિક્ષણના નિયમોનુસાર વિદ્યાર્થી G.R., L.C., SCE ગુણપત્રક, શિક્ષક ડાયરી, સ્ટાફ રજા અને SSA ગ્રાન્ટ હિસાબ માટેનું એકીકૃત પોર્ટલ.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-3 z-10">
+                    <button onclick="openModal('addStudentModal')" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-user-plus"></i> નવો વિદ્યાર્થી દાખલ કરો
+                    </button>
+                    <button onclick="switchTab('lcGenerator')" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2 text-sm backdrop-blur-sm">
+                        <i class="fa-solid fa-print"></i> L.C. પ્રિન્ટ
+                    </button>
+                </div>
+                <!-- Background decoration icon -->
+                <i class="fa-solid fa-graduation-cap absolute -right-6 -bottom-6 text-9xl text-white/5 pointer-events-none"></i>
+            </div>
+
+            <!-- Stats Overview Cards -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4 space-x-reverse">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-2xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 font-semibold">કુલ વિદ્યાર્થીઓ (Std 1-8)</div>
+                        <div id="statTotalStudents" class="text-2xl font-extrabold text-slate-900">0</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4 space-x-reverse">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 font-semibold">શિક્ષક સ્ટાફ સંખ્યા</div>
+                        <div id="statTotalStaff" class="text-2xl font-extrabold text-slate-900">6</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4 space-x-reverse">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-2xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-file-circle-check"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 font-semibold">ઇશ્યૂ કરેલ L.C.</div>
+                        <div id="statIssuedLC" class="text-2xl font-extrabold text-slate-900">14</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4 space-x-reverse">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 font-semibold">SSA ગ્રાન્ટ ઉપલબ્ધ બેલેન્સ</div>
+                        <div id="statGrantBalance" class="text-2xl font-extrabold text-slate-900 font-mono">₹ 14,850</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Row: Class-wise Count & Pending School Tasks -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Class-wise Distribution -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-chart-column text-blue-600"></i> ધોરણવાર સંખ્યા પત્રક (Std 1 - 8)
+                        </h3>
+                        <span class="text-xs text-slate-400 font-mono">હાલની સ્થિતિ</span>
+                    </div>
+                    <div id="classDistributionGrid" class="grid grid-cols-4 gap-2 text-center text-xs">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Academic Tasks & Alerts -->
+                <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+                        <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-bell text-amber-500"></i> શૈક્ષણિક અને વહીવટી કાર્યસૂચિ (Checklist)
+                        </h3>
+                        <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">ચાલુ માસ</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <div class="p-3 bg-blue-50 border border-blue-100 rounded-xl flex items-start gap-3">
+                            <i class="fa-solid fa-circle-check text-blue-600 mt-0.5"></i>
+                            <div>
+                                <span class="font-bold text-slate-900 block">સત્રાંત મૂલ્યાંકન (SCE) ગુણ એન્ટ્રી</span>
+                                <span class="text-slate-600">ધોરણ ૩ થી ૮ ના પત્રક-A અને B ગુણ ચકાસી પ્રગતિ પત્રક તૈયાર કરવા.</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-emerald-50 border border-emerald-100 rounded-xl flex items-start gap-3">
+                            <i class="fa-solid fa-calendar-day text-emerald-600 mt-0.5"></i>
+                            <div>
+                                <span class="font-bold text-slate-900 block">માસિક SMC બેઠક આયોજન</span>
+                                <span class="text-slate-600">ગ્રાન્ટ વપરાશ અને શાળા વિકાસ યોજના માટે ઠરાવ પસાર કરવો.</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-purple-50 border border-purple-100 rounded-xl flex items-start gap-3">
+                            <i class="fa-solid fa-id-card text-purple-600 mt-0.5"></i>
+                            <div>
+                                <span class="font-bold text-slate-900 block">આધાર ડાયસ (UID) વેરિફિકેશન</span>
+                                <span class="text-slate-600">નવા પ્રવેશેલ વિદ્યાર્થીઓના ૧૮ અંકના યુનિક ID ચકાસવા.</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-amber-50 border border-amber-100 rounded-xl flex items-start gap-3">
+                            <i class="fa-solid fa-receipt text-amber-600 mt-0.5"></i>
+                            <div>
+                                <span class="font-bold text-slate-900 block">રમતગમત / લાઈબ્રેરી ગ્રાન્ટ વાઉચર્સ</span>
+                                <span class="text-slate-600">ડેડસ્ટોક રજિસ્ટરમાં સાધનોની નોંધ પૂર્ણ કરવી.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Students in G.R. -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+                <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-blue-600"></i>
+                        <h3 class="font-bold text-slate-800">તાજેતરમાં નોંધાયેલ વિદ્યાર્થીઓ (G.R. ડેટાબેઝ)</h3>
+                    </div>
+                    <button onclick="switchTab('grRegister')" class="text-xs text-blue-600 hover:underline font-bold">બધા જુઓ &rarr;</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 text-slate-600 border-b border-slate-200 text-xs uppercase font-bold">
+                            <tr>
+                                <th class="p-3">G.R. નં.</th>
+                                <th class="p-3">વિદ્યાર્થીનું નામ</th>
+                                <th class="p-3">પિતાનું નામ</th>
+                                <th class="p-3">ધોરણ</th>
+                                <th class="p-3">જન્મતારીખ (શબ્દોમાં)</th>
+                                <th class="p-3 text-right">કાર્ય</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboardRecentTable" class="divide-y divide-slate-100 text-slate-700">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================= 2. GENERAL REGISTER (G.R.) ======================= -->
+        <section id="tab-grRegister" class="tab-content hidden space-y-6">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-address-book text-blue-600"></i> વિદ્યાર્થી જનરલ રજિસ્ટર (G.R. Register)
+                    </h2>
+                    <p class="text-xs text-slate-500">વિદ્યાર્થી નોંધણી, આધાર ડાયસ નં., આપોઆપ ગુજરાતી જન્મતારીખ શબ્દોમાં અને કાયમી સંગ્રહ</p>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-2 w-full md:w-auto">
+                    <div class="relative flex-grow md:flex-grow-0">
+                        <input type="text" id="searchGrInput" onkeyup="filterStudents()" placeholder="નામ, G.R. કે આધાર..." class="w-full md:w-64 pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                    </div>
+
+                    <select id="filterStdSelect" onchange="filterStudents()" class="text-sm border border-slate-300 rounded-xl px-3 py-2 focus:ring-2 focu
