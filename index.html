@@ -323,4 +323,1654 @@
                         <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
                     </div>
 
-                    <select id="filterStdSelect" onchange="filterStudents()" class="text-sm border border-slate-300 rounded-xl px-3 py-2 focus:ring-2 focu
+                    <select id="filterStdSelect" onchange="filterStudents()" class="text-sm border border-slate-300 rounded-xl px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <option value="">તમામ ધોરણ</option>
+                        <option value="1">ધોરણ ૧</option>
+                        <option value="2">ધોરણ ૨</option>
+                        <option value="3">ધોરણ ૩</option>
+                        <option value="4">ધોરણ ૪</option>
+                        <option value="5">ધોરણ ૫</option>
+                        <option value="6">ધોરણ ૬</option>
+                        <option value="7">ધોરણ ૭</option>
+                        <option value="8">ધોરણ ૮</option>
+                    </select>
+
+                    <button onclick="openModal('addStudentModal')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition flex items-center gap-2 shadow">
+                        <i class="fa-solid fa-user-plus"></i> નવો વિદ્યાર્થી
+                    </button>
+                </div>
+            </div>
+
+            <!-- Student Master Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead class="bg-slate-100 text-slate-700 text-xs uppercase font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3.5">G.R. નં.</th>
+                                <th class="p-3.5">વિદ્યાર્થીનું પૂરું નામ</th>
+                                <th class="p-3.5">માતા-પિતાનું નામ</th>
+                                <th class="p-3.5">ધોરણ</th>
+                                <th class="p-3.5">જન્મતારીખ (અંક અને શબ્દો)</th>
+                                <th class="p-3.5">કેટેગરી / જાતિ</th>
+                                <th class="p-3.5">આધાર ડાયસ નં.</th>
+                                <th class="p-3.5 text-center">ક્રિયાઓ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grTableBody" class="divide-y divide-slate-200 text-slate-700">
+                            <!-- Injected by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="noStudentFound" class="hidden p-8 text-center text-slate-400 text-sm">
+                    <i class="fa-solid fa-user-slash text-3xl mb-2 block"></i>
+                    કોઈ વિદ્યાર્થી મળ્યા નથી.
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================= 3. L.C. GENERATOR (FORM 4) ======================= -->
+        <section id="tab-lcGenerator" class="tab-content hidden space-y-6">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4 no-print">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-certificate text-amber-600"></i> શાળા છોડ્યાનું પ્રમાણપત્ર (L.C. જનરેટર - પરિશિષ્ટ ૪)
+                    </h2>
+                    <p class="text-xs text-slate-500">પ્રાથમિક શિક્ષણ નિયમો અંતર્ગત તમામ ૧૪ કૉલમ ધરાવતું સત્તાવાર ગુજરાતી પ્રમાણપત્ર</p>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <select id="selectStudentForLC" onchange="loadStudentLC(this.value)" class="text-sm border border-slate-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:outline-none min-w-[260px]">
+                        <option value="">વિદ્યાર્થી પસંદ કરો (G.R. નં.)...</option>
+                        <!-- Loaded dynamically -->
+                    </select>
+
+                    <button onclick="window.print()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-4 py-2.5 rounded-xl text-sm transition flex items-center gap-2 shadow">
+                        <i class="fa-solid fa-print"></i> L.C. પ્રિન્ટ (A4)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Print-ready Official LC Layout -->
+            <div class="bg-white p-8 md:p-12 rounded-2xl border-4 border-slate-800 shadow-xl max-w-4xl mx-auto printable-sheet relative text-slate-900">
+                <div class="border-2 border-slate-700 p-6 relative">
+                    <!-- Watermark -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none select-none">
+                        <i class="fa-solid fa-graduation-cap text-[280px]"></i>
+                    </div>
+
+                    <!-- Header -->
+                    <div class="text-center pb-4 border-b-2 border-slate-800">
+                        <div class="text-xs font-bold tracking-widest text-slate-600 uppercase">પરિશિષ્ટ - ૪ (નિયમ ૨૪ મુજબ)</div>
+                        <h2 class="text-2xl md:text-3xl font-extrabold mt-1 text-slate-900">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</h2>
+                        <p class="text-sm font-semibold text-slate-700">તાલુકો: ધંધૂકા, જિલ્લો: અમદાવાદ | પિન કોડ: ૩૮૨૪૬૦</p>
+                        <p class="text-xs font-medium text-slate-600 mt-1">શાળા માન્યતા ક્રમાંક: પ્રા.શિક્ષણ/અમદ/૨૦૧૨/૩૪૧૨ | U-DISE કોડ: 24070500101</p>
+                        <div class="inline-block mt-3 px-6 py-1 bg-slate-900 text-white font-bold text-base md:text-lg tracking-wide rounded">
+                            શાળા છોડ્યાનું પ્રમાણપત્ર (SCHOOL LEAVING CERTIFICATE)
+                        </div>
+                    </div>
+
+                    <!-- LC Meta Details -->
+                    <div class="flex justify-between items-center my-4 text-sm font-semibold border-b border-slate-300 pb-2">
+                        <div>જનરલ રજિસ્ટર (G.R.) નં.: <span id="lcGrNo" class="font-bold underline text-base text-blue-900 font-mono">---</span></div>
+                        <div>L.C. ક્રમાંક: <span id="lcCertNo" class="font-bold underline text-base font-mono">LC/2026/001</span></div>
+                        <div>વિદ્યાર્થી યુનિક ID: <span id="lcUid" class="font-bold underline text-base font-mono">---</span></div>
+                    </div>
+
+                    <!-- Table of 14 Standard Fields -->
+                    <div class="space-y-2 text-sm leading-relaxed mt-4">
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૧.</span>
+                            <span class="col-span-4 font-semibold">કુમાર / કન્યાનું પૂરું નામ:</span>
+                            <span id="lcFullName" class="col-span-7 font-bold text-base text-slate-900">---</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૨.</span>
+                            <span class="col-span-4 font-semibold">પિતા / વાલીનું પૂરું નામ:</span>
+                            <span id="lcFatherName" class="col-span-7 font-bold text-slate-900">---</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૩.</span>
+                            <span class="col-span-4 font-semibold">માતાનું નામ:</span>
+                            <span id="lcMotherName" class="col-span-7 font-bold text-slate-900">---</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૪.</span>
+                            <span class="col-span-4 font-semibold">રાષ્ટ્રીયતા અને ધર્મ / જાતિ:</span>
+                            <span id="lcCategory" class="col-span-7 font-semibold text-slate-900">ભારતીય - હિન્દુ</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૫.</span>
+                            <span class="col-span-4 font-semibold">જન્મસ્થળ (ગામ/તાલુકો/જિલ્લો):</span>
+                            <span id="lcBirthPlace" class="col-span-7 font-semibold text-slate-900">ધંધૂકા, જિ. અમદાવાદ</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૬.</span>
+                            <span class="col-span-4 font-semibold">જન્મતારીખ (ઈ.સ. અંકમાં):</span>
+                            <span id="lcDobDigit" class="col-span-7 font-bold text-base font-mono text-slate-900">--/--/----</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200 bg-amber-50/70 px-2 rounded">
+                            <span class="col-span-1 font-bold text-slate-600">૭.</span>
+                            <span class="col-span-4 font-semibold text-slate-900">જન્મતારીખ (શબ્દોમાં):</span>
+                            <span id="lcDobWords" class="col-span-7 font-bold text-blue-950">---</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૮.</span>
+                            <span class="col-span-4 font-semibold">અગાઉની શાળાનું નામ:</span>
+                            <span class="col-span-7 font-medium text-slate-800">આંગણવાડી કેન્દ્ર / પ્રથમ પ્રવેશ</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૯.</span>
+                            <span class="col-span-4 font-semibold">પ્રવેશ તારીખ અને ધોરણ:</span>
+                            <span id="lcAdmissionInfo" class="col-span-7 font-semibold text-slate-900">૧૫/૦૬/૨૦૨૦ (ધોરણ ૧)</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૧૦.</span>
+                            <span class="col-span-4 font-semibold">શાળા છોડતી વખતના અભ્યાસનું ધોરણ:</span>
+                            <span id="lcLeavingStd" class="col-span-7 font-bold text-slate-900">---</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૧૧.</span>
+                            <span class="col-span-4 font-semibold">શાળા છોડવાનું કારણ:</span>
+                            <span class="col-span-7 font-semibold text-slate-900">વાલીની બદલી થવાથી / ઉચ્ચ અભ્યાસ અર્થે</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૧૨.</span>
+                            <span class="col-span-4 font-semibold">વર્તણૂક અને પ્રગતિ:</span>
+                            <span class="col-span-7 font-semibold text-emerald-800">ઉત્તમ (GOOD)</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1 border-b border-slate-200">
+                            <span class="col-span-1 font-bold text-slate-600">૧૩.</span>
+                            <span class="col-span-4 font-semibold">શાળામાં હાજરી દિવસો:</span>
+                            <span class="col-span-7 font-semibold text-slate-900">૨૧૬ / ૨૨૦ દિવસ</span>
+                        </div>
+
+                        <div class="grid grid-cols-12 gap-2 py-1">
+                            <span class="col-span-1 font-bold text-slate-600">૧૪.</span>
+                            <span class="col-span-4 font-semibold">પ્રમાણપત્ર આપ્યા તારીખ:</span>
+                            <span id="lcIssueDate" class="col-span-7 font-bold font-mono text-slate-900">--/--/----</span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs italic text-slate-600 mt-6 pt-3 border-t border-slate-400">
+                        પ્રમાણિત કરવામાં આવે છે કે ઉપરોક્ત વિગત શાળાના જનરલ રજિસ્ટર (G.R.) માં નોંધાયેલી માહિતી સાથે સંપૂર્ણપણે મેળવીને ખરાઈ કરવામાં આવી છે.
+                    </p>
+
+                    <div class="grid grid-cols-3 gap-4 text-center mt-12 pt-6 font-bold text-xs text-slate-800">
+                        <div>
+                            <div class="h-10"></div>
+                            <span class="border-t border-slate-700 pt-1 block">તૈયાર કરનાર શિક્ષકની સહી</span>
+                        </div>
+                        <div>
+                            <div class="h-10"></div>
+                            <span class="border-t border-slate-700 pt-1 block">ચકાસનાર વર્ગશિક્ષક</span>
+                        </div>
+                        <div>
+                            <div class="h-10 flex items-center justify-center">
+                                <span class="text-[10px] text-slate-400 border border-dashed border-slate-400 px-2 py-0.5 rounded">શાળાનો સિક્કો</span>
+                            </div>
+                            <span class="border-t border-slate-700 pt-1 block">આચાર્યશ્રીની સહી અને સિક્કો</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================= 4. SCE EVALUATION & MARKSHEET ======================= -->
+        <section id="tab-sceMarksheet" class="tab-content hidden space-y-6">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4 no-print">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-file-invoice text-emerald-600"></i> સતત અને સર્વગ્રાહી મૂલ્યાંકન (SCE) ગુણપત્રક
+                    </h2>
+                    <p class="text-xs text-slate-500">ધોરણ ૩ થી ૮: રચનાત્મક (પત્રક-A) ૪૦ ગુણ + સત્રાંત (પત્રક-B) ૬૦ ગુણ = ૧૦૦ ગુણ</p>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <select id="marksheetStudentSelect" onchange="loadStudentMarksheet(this.value)" class="text-sm border border-slate-300 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none min-w-[240px]">
+                        <option value="">વિદ્યાર્થી પસંદ કરો...</option>
+                        <!-- Loaded via JS -->
+                    </select>
+
+                    <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition flex items-center gap-2 shadow">
+                        <i class="fa-solid fa-print"></i> પ્રગતિ પત્રક પ્રિન્ટ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Printable Student Progress Report Card -->
+            <div class="bg-white rounded-2xl border border-slate-300 shadow-lg p-6 max-w-4xl mx-auto printable-sheet text-slate-900">
+                <div class="text-center border-b-2 border-slate-800 pb-3 mb-4">
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-900">શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</h3>
+                    <p class="text-xs text-slate-600">જિલ્લા પંચાયત શિક્ષણ સમિતિ, અમદાવાદ | U-DISE: 24070500101</p>
+                    <div class="inline-block mt-2 px-4 py-0.5 bg-slate-900 text-amber-300 font-bold text-sm rounded">
+                        વિદ્યાર્થી વાર્ષિક પ્રગતિ પત્રક (PROGRESS REPORT CARD) - સત્ર ૨૦૨૬-૨૭
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs mb-4">
+                    <div><span class="text-slate-500">નામ:</span> <strong id="cardStudentName" class="text-slate-900 block text-sm">---</strong></div>
+                    <div><span class="text-slate-500">G.R. નં.:</span> <strong id="cardGrNo" class="text-slate-900 block font-mono text-sm">---</strong></div>
+                    <div><span class="text-slate-500">ધોરણ / વર્ગ:</span> <strong id="cardStd" class="text-slate-900 block text-sm">---</strong></div>
+                    <div><span class="text-slate-500">વાર્ષિક હાજરી:</span> <strong class="text-slate-900 block font-mono text-sm">૨૧૪ / ૨૨૦ દિવસ</strong></div>
+                </div>
+
+                <!-- Marks Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-center border-collapse border border-slate-400 text-xs sm:text-sm">
+                        <thead class="bg-slate-200 text-slate-800 font-bold">
+                            <tr>
+                                <th class="border border-slate-400 p-2 text-left">અધ્યયન વિષય</th>
+                                <th class="border border-slate-400 p-2">રચનાત્મક મૂલ્યાંકન (પત્રક-A)<br><span class="text-[10px] font-normal">(૪૦ ગુણમાંથી)</span></th>
+                                <th class="border border-slate-400 p-2">સત્રાંત મૂલ્યાંકન (પત્રક-B)<br><span class="text-[10px] font-normal">(૬૦ ગુણમાંથી)</span></th>
+                                <th class="border border-slate-400 p-2">કુલ ગુણ<br><span class="text-[10px] font-normal">(૧૦૦ માંથી)</span></th>
+                                <th class="border border-slate-400 p-2">ગ્રેડ (Grade)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="marksheetTableBody">
+                            <!-- Injected by JS -->
+                        </tbody>
+                        <tfoot class="bg-slate-100 font-bold text-slate-900">
+                            <tr>
+                                <td class="border border-slate-400 p-2.5 text-left">કુલ વાર્ષિક પરિણામ</td>
+                                <td class="border border-slate-400 p-2" id="sumFormative">0</td>
+                                <td class="border border-slate-400 p-2" id="sumSummative">0</td>
+                                <td class="border border-slate-400 p-2 font-mono text-base text-blue-900" id="grandTotalMarks">0 / 600</td>
+                                <td class="border border-slate-400 p-2 font-mono text-base text-emerald-800" id="finalGrade">--</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Grading Scale & Remark -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 pt-3 border-t border-slate-300 text-xs">
+                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+                        <div class="font-bold text-slate-700 mb-1">ગુજરાત પ્રાથમિક શિક્ષણ ગ્રેડિંગ સ્કેલ:</div>
+                        <div class="grid grid-cols-4 gap-1 text-slate-600 font-mono text-[10px]">
+                            <span>A1: 91-100</span>
+                            <span>A2: 81-90</span>
+                            <span>B1: 71-80</span>
+                            <span>B2: 61-70</span>
+                            <span>C1: 51-60</span>
+                            <span>C2: 41-50</span>
+                            <span>D: 33-40</span>
+                            <span>E: &lt;33</span>
+                        </div>
+                    </div>
+                    <div class="bg-emerald-50 p-3 rounded-lg border border-emerald-200 text-emerald-900">
+                        <div class="font-bold mb-1">વર્ગશિક્ષક અભિપ્રાય (Teacher Remark):</div>
+                        <p id="teacherRemarkText" class="font-medium">વિદ્યાર્થી ભાષા અને ગણિતમાં ખૂબ જિજ્ઞાસુ અને નિયમિત છે. સર્જનાત્મક કાર્યોમાં સક્રિય ભાગ લે છે.</p>
+                    </div>
+                </div>
+
+                <!-- Signatures -->
+                <div class="grid grid-cols-3 gap-4 text-center mt-10 pt-4 text-xs font-bold">
+                    <div>
+                        <div class="h-8"></div>
+                        <span class="border-t border-slate-700 pt-1 block">વર્ગશિક્ષકની સહી</span>
+                    </div>
+                    <div>
+                        <div class="h-8"></div>
+                        <span class="border-t border-slate-700 pt-1 block">વાલીની સહી</span>
+                    </div>
+                    <div>
+                        <div class="h-8"></div>
+                        <span class="border-t border-slate-700 pt-1 block">આચાર્યશ્રીની સહી અને સિક્કો</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================= 5. TEACHER'S DIARY & LESSON PLAN ======================= -->
+        <section id="tab-teacherDiary" class="tab-content hidden space-y-6">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open-reader text-purple-600"></i> શિક્ષક દૈનિક ડાયરી અને એકમ આયોજન
+                    </h2>
+                    <p class="text-xs text-slate-500">અધ્યયન નિષ્પત્તિ (LOs), શિક્ષણ પદ્ધતિ, TLM સાધન સામગ્રી અને મૂલ્યાંકન નોંધ</p>
+                </div>
+
+                <button onclick="openModal('addDiaryModal')" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-plus"></i> નવી ડાયરી નોંધ ઉમેરો
+                </button>
+            </div>
+
+            <div id="diaryEntriesContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+
+
+        <!-- ======================= 6. STAFF LEAVE REGISTER ======================= -->
+        <section id="tab-staffLeave" class="tab-content hidden space-y-6">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check text-rose-600"></i> સ્ટાફ રજા રજિસ્ટર (Leave Register)
+                    </h2>
+                    <p class="text-xs text-slate-500">શિક્ષકોની C.L. (કેઝ્યુઅલ લીવ), H.P.L. (અર્ધપગારી) અને વિશિષ્ટ રજાઓનું ટ્રેકિંગ</p>
+                </div>
+
+                <button onclick="openModal('addLeaveModal')" class="bg-rose-600 hover:bg-rose-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-plus"></i> નવી રજા અરજી નોંધ
+                </button>
+            </div>
+
+            <!-- Staff Balance Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="staffBalanceCards">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Leave History Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-clock-rotate-left text-slate-400"></i> તાજેતરની મંજૂર થયેલી રજાઓનો ઇતિહાસ
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 text-slate-600 text-xs uppercase font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3">શિક્ષકનું નામ</th>
+                                <th class="p-3">હોદ્દો</th>
+                                <th class="p-3">રજા પ્રકાર</th>
+                                <th class="p-3">તારીખ</th>
+                                <th class="p-3">દિવસો સંખ્યા</th>
+                                <th class="p-3">રજાનું કારણ</th>
+                                <th class="p-3">સ્થિતિ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaveHistoryTable" class="divide-y divide-slate-100 text-slate-700">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================= 7. OFFICIAL CORRESPONDENCE & GEMINI AI DRAFTER ======================= -->
+        <section id="tab-aiDrafter" class="tab-content hidden space-y-6">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> સત્તાવાર પત્રવ્યવહાર & SMC ઠરાવ સહાયક
+                </h2>
+                <p class="text-xs text-slate-500">શાળા વ્યવસ્થાપન સમિતિ (SMC) ઠરાવ, બોનાફાઇડ પ્રમાણપત્ર અને Gemini 2.5 Flash સંચાલિત ગુજરાતી પત્ર લેખન</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left: Built-in Templates & AI Input -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+                    <label class="block text-xs font-bold text-slate-700 uppercase">નિયત નમૂનાઓ (Templates):</label>
+                    <div class="space-y-2">
+                        <button onclick="applyDraftTemplate('smc')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-blue-50 hover:border-blue-300 transition text-sm flex items-center justify-between">
+                            <span class="font-medium text-slate-800">SMC માસિક બેઠક ઠરાવ</span>
+                            <i class="fa-solid fa-file-pen text-blue-600"></i>
+                        </button>
+                        <button onclick="applyDraftTemplate('bonafide')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-blue-50 hover:border-blue-300 transition text-sm flex items-center justify-between">
+                            <span class="font-medium text-slate-800">બોનાફાઇડ સર્ટિફિકેટ</span>
+                            <i class="fa-solid fa-award text-amber-600"></i>
+                        </button>
+                        <button onclick="applyDraftTemplate('tour')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-blue-50 hover:border-blue-300 transition text-sm flex items-center justify-between">
+                            <span class="font-medium text-slate-800">શૈક્ષણિક પ્રવાસ પરવાનગી અરજી</span>
+                            <i class="fa-solid fa-bus text-emerald-600"></i>
+                        </button>
+                        <button onclick="applyDraftTemplate('leaveApp')" class="w-full text-left p-3 rounded-xl border border-slate-200 hover:bg-blue-50 hover:border-blue-300 transition text-sm flex items-center justify-between">
+                            <span class="font-medium text-slate-800">શિક્ષક રજા મંજૂરી અરજી</span>
+                            <i class="fa-solid fa-user-clock text-rose-600"></i>
+                        </button>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-200">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Gemini AI દ્વારા કસ્ટમ પત્ર ડ્રાફ્ટ કરો:</label>
+                        <textarea id="aiDraftPrompt" rows="3" placeholder="દા.ત. શાળામાં યોગ દિવસની ઉજવણી અર્થે BRC કચેરીને મોકલવાનો અહેવાલ પત્ર..." class="w-full p-2.5 text-sm border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                        <button onclick="generateLetterWithGemini()" id="btnGenerateAi" class="mt-2 w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-4 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow">
+                            <i class="fa-solid fa-bolt text-amber-400"></i> સત્તાવાર ગુજરાતી પત્ર બનાવો
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Document Editor / Preview Canvas -->
+                <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center pb-3 mb-4 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-file-lines text-blue-600"></i> દસ્તાવેજ પ્રિવ્યૂ (Edit & Print)
+                            </h3>
+                            <button onclick="printCustomDocument()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-print"></i> પ્રિન્ટ / સેવ PDF
+                            </button>
+                        </div>
+
+                        <div id="draftDocumentEditor" contenteditable="true" class="min-h-[440px] p-6 border border-slate-200 rounded-xl bg-slate-50/50 text-slate-800 text-sm leading-relaxed focus:outline-none focus:bg-white focus:ring-1 focus:ring-blue-400">
+                            <!-- Injected content -->
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-slate-400 pt-3 flex justify-between items-center border-t border-slate-100 mt-4">
+                        <span><i class="fa-solid fa-circle-info"></i> લખાણ પર ક્લિક કરીને કોઈપણ વિગતમાં સુધારો કરી શકાય છે.</span>
+                        <button onclick="copyDraftToClipboard()" class="text-blue-600 font-semibold hover:underline">ક્લિપબોર્ડમાં કોપી</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ======================= 8. SCHOOL GRANT & EXPENSE LEDGER ======================= -->
+        <section id="tab-grantLedger" class="tab-content hidden space-y-6">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-wallet text-emerald-600"></i> શાળા ગ્રાન્ટ અને હિસાબ કીપર (Grant Ledger)
+                    </h2>
+                    <p class="text-xs text-slate-500">SSA કમ્પોઝિટ સ્કૂલ ગ્રાન્ટ, રમતગમત ગ્રાન્ટ, લાઈબ્રેરી ગ્રાન્ટની આવક-જાવક અને વાઉચર્સ</p>
+                </div>
+
+                <button onclick="openModal('addGrantModal')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-xl text-sm transition flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-plus"></i> નવો ખર્ચ / આવક વાઉચર
+                </button>
+            </div>
+
+            <!-- Grant Head Balances -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="grantHeadCards">
+                <!-- Injected by JS -->
+            </div>
+
+            <!-- Ledger Table -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm flex items-center justify-between">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-book text-slate-400"></i> શાળા કેશબુક / વાઉચર રજિસ્ટર (સત્ર ૨૦૨૬-૨૭)
+                    </span>
+                    <button onclick="window.print()" class="text-xs text-emerald-700 hover:underline font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-print"></i> પત્રક પ્રિન્ટ
+                    </button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 text-slate-600 text-xs uppercase font-bold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3">તારીખ</th>
+                                <th class="p-3">વાઉચર નં.</th>
+                                <th class="p-3">ગ્રાન્ટ હેડ</th>
+                                <th class="p-3">વિગત / સામગ્રીનું નામ</th>
+                                <th class="p-3">આવક (₹)</th>
+                                <th class="p-3">ખર્ચ (₹)</th>
+                                <th class="p-3">બાકી બેલેન્સ (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grantLedgerTableBody" class="divide-y divide-slate-100 text-slate-700">
+                            <!-- Injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 mt-12 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>
+                <span class="font-bold text-slate-200">શૈક્ષણિક સારથી (Shikshanik Sarathi)</span> - Devloped by Devendra Ramanuj, 9276505035
+            </div>
+            <div>
+                સંપૂર્ણપણે સુરક્ષિત | ઓફલાઇન લોકલ સ્ટોરેજ સપોર્ટ
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ======================= MODALS ======================= -->
+
+    <!-- 1. Add Student Modal -->
+    <div id="addStudentModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden no-print backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus text-blue-600"></i> નવી વિદ્યાર્થી G.R. નોંધણી
+                </h3>
+                <button onclick="closeModal('addStudentModal')" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+            </div>
+
+            <form id="studentForm" onsubmit="handleSaveStudent(event)" class="space-y-4 text-sm">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">G.R. નંબર *</label>
+                        <input type="number" id="formGrNo" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 font-mono">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">વિદ્યાર્થીનું પૂરું નામ *</label>
+                        <input type="text" id="formFullName" placeholder="દા.ત. પટેલ હર્ષકુમાર" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">પિતાનું પૂરું નામ *</label>
+                        <input type="text" id="formFatherName" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">માતાનું નામ *</label>
+                        <input type="text" id="formMotherName" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">જન્મતારીખ *</label>
+                        <input type="date" id="formDob" onchange="convertDobToGujaratiWords(this.value)" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">જન્મતારીખ (શબ્દોમાં - આપમેળે લખાશે) *</label>
+                        <input type="text" id="formDobWords" readonly placeholder="તારીખ પસંદ કરતા આપોઆપ લખાશે..." class="w-full p-2.5 bg-amber-50/80 font-medium text-amber-950 border border-amber-300 rounded-xl focus:outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">ધોરણ *</label>
+                        <select id="formStd" required class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="1">ધોરણ ૧</option>
+                            <option value="2">ધોરણ ૨</option>
+                            <option value="3">ધોરણ ૩</option>
+                            <option value="4">ધોરણ ૪</option>
+                            <option value="5">ધોરણ ૫</option>
+                            <option value="6">ધોરણ ૬</option>
+                            <option value="7">ધોરણ ૭</option>
+                            <option value="8">ધોરણ ૮</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">કેટેગરી</label>
+                        <select id="formCategory" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="સામાન્ય (General)">સામાન્ય (General)</option>
+                            <option value="ઓ.બી.સી. (SEBC)">ઓ.બી.સી. (SEBC)</option>
+                            <option value="એસ.સી. (SC)">એસ.સી. (SC)</option>
+                            <option value="એસ.ટી. (ST)">એસ.ટી. (ST)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">જાતિ (Gender)</label>
+                        <select id="formGender" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500">
+                            <option value="કુમાર">કુમાર (Boy)</option>
+                            <option value="કન્યા">કન્યા (Girl)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">આધાર ડાયસ / યુનિક ID (18 આંકડા)</label>
+                    <input type="text" id="formUid" maxlength="18" placeholder="દા.ત. 240705001012100012" class="w-full p-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 font-mono">
+                </div>
+
+                <div class="flex justify-end gap-2 pt-3 border-t border-slate-200">
+                    <button type="button" onclick="closeModal('addStudentModal')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-xl transition">રદ કરો</button>
+                    <button type="submit" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition shadow">G.R. માં સેવ કરો</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. Add Diary Modal -->
+    <div id="addDiaryModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden no-print backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-book-bookmark text-purple-600"></i> શિક્ષક ડાયરી નોંધ ઉમેરો
+                </h3>
+                <button onclick="closeModal('addDiaryModal')" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+            </div>
+            <form id="diaryForm" onsubmit="handleSaveDiary(event)" class="space-y-3 text-sm">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">તારીખ</label>
+                        <input type="date" id="diaryDate" required class="w-full p-2.5 border border-slate-300 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">ધોરણ</label>
+                        <select id="diaryStd" class="w-full p-2.5 border border-slate-300 rounded-xl">
+                            <option value="ધોરણ ૩">ધોરણ ૩</option>
+                            <option value="ધોરણ ૪">ધોરણ ૪</option>
+                            <option value="ધોરણ ૫">ધોરણ ૫</option>
+                            <option value="ધોરણ ૬">ધોરણ ૬</option>
+                            <option value="ધોરણ ૭">ધોરણ ૭</option>
+                            <option value="ધોરણ ૮">ધોરણ ૮</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">વિષય અને એકમ</label>
+                    <input type="text" id="diarySubject" placeholder="દા.ત. ગણિત - એકમ: ૭ અપૂર્ણાંક સંખ્યાઓ" required class="w-full p-2.5 border border-slate-300 rounded-xl">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">અધ્યયન નિષ્પત્તિ (Learning Outcome / LO Code)</label>
+                    <input type="text" id="diaryLo" placeholder="દા.ત. M604: સમચ્છેદી અને વિષમચ્છેદી અપૂર્ણાંકો સમજે છે" required class="w-full p-2.5 border border-slate-300 rounded-xl">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">વપરાયેલ TLM અને શિક્ષણ પદ્ધતિ</label>
+                    <input type="text" id="diaryTlm" placeholder="દા.ત. ફ્લેશ કાર્ડ, રંગીન કાગળ કટીંગ અને જૂથ ચર્ચા" class="w-full p-2.5 border border-slate-300 rounded-xl">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">ગૃહકાર્ય / મૂલ્યાંકન નોંધ</label>
+                    <textarea id="diaryRemark" rows="2" class="w-full p-2.5 border border-slate-300 rounded-xl"></textarea>
+                </div>
+                <div class="flex justify-end gap-2 pt-2 border-t border-slate-200">
+                    <button type="button" onclick="closeModal('addDiaryModal')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-xl">રદ કરો</button>
+                    <button type="submit" class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow">સેવ કરો</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. Add Leave Modal -->
+    <div id="addLeaveModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden no-print backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-plane-departure text-rose-600"></i> નવી રજા અરજી નોંધ
+                </h3>
+                <button onclick="closeModal('addLeaveModal')" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+            </div>
+            <form id="leaveForm" onsubmit="handleSaveLeave(event)" class="space-y-3 text-sm">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">શિક્ષકનું નામ</label>
+                    <select id="leaveTeacherName" class="w-full p-2.5 border border-slate-300 rounded-xl">
+                        <option value="પટેલ હિતેશકુમાર એમ. (આચાર્ય)">પટેલ હિતેશકુમાર એમ. (આચાર્ય)</option>
+                        <option value="જોષી મીનાક્ષીબેન આર. (સહશિક્ષક)">જોષી મીનાક્ષીબેન આર. (સહશિક્ષક)</option>
+                        <option value="શાહ વિવેકકુમાર કે. (સહશિક્ષક)">શાહ વિવેકકુમાર કે. (સહશિક્ષક)</option>
+                        <option value="દવે અલ્કેશકુમાર બી. (સહશિક્ષક)">દવે અલ્કેશકુમાર બી. (સહશિક્ષક)</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">રજા પ્રકાર</label>
+                        <select id="leaveType" class="w-full p-2.5 border border-slate-300 rounded-xl">
+                            <option value="C.L. (કેઝ્યુઅલ)">C.L. (કેઝ્યુઅલ)</option>
+                            <option value="H.P.L. (અર્ધપગારી)">H.P.L. (અર્ધપગારી)</option>
+                            <option value="વિશેષ રજા">વિશેષ રજા</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">દિવસો સંખ્યા</label>
+                        <input type="number" id="leaveDays" min="1" max="15" value="1" required class="w-full p-2.5 border border-slate-300 rounded-xl">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">તારીખ</label>
+                    <input type="date" id="leaveStartDate" required class="w-full p-2.5 border border-slate-300 rounded-xl">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">રજાનું કારણ</label>
+                    <input type="text" id="leaveReason" placeholder="દા.ત. અંગત સામાજિક પ્રસંગ અંગે" required class="w-full p-2.5 border border-slate-300 rounded-xl">
+                </div>
+                <div class="flex justify-end gap-2 pt-2 border-t border-slate-200">
+                    <button type="button" onclick="closeModal('addLeaveModal')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-xl">રદ કરો</button>
+                    <button type="submit" class="px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow">મંજૂર કરો</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. Add Grant Voucher Modal -->
+    <div id="addGrantModal" class="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 hidden no-print backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-receipt text-emerald-600"></i> ગ્રાન્ટ વાઉચર નોંધણી
+                </h3>
+                <button onclick="closeModal('addGrantModal')" class="text-slate-400 hover:text-slate-600 text-2xl font-bold">&times;</button>
+            </div>
+            <form id="grantForm" onsubmit="handleSaveGrantVoucher(event)" class="space-y-3 text-sm">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">તારીખ</label>
+                        <input type="date" id="voucherDate" required class="w-full p-2.5 border border-slate-300 rounded-xl">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">વાઉચર નં.</label>
+                        <input type="text" id="voucherNo" placeholder="દા.ત. V-26/18" required class="w-full p-2.5 border border-slate-300 rounded-xl font-mono">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">ગ્રાન્ટ હેડ</label>
+                    <select id="voucherHead" class="w-full p-2.5 border border-slate-300 rounded-xl">
+                        <option value="SSA કમ્પોઝિટ ગ્રાન્ટ">SSA કમ્પોઝિટ ગ્રાન્ટ</option>
+                        <option value="રમત-ગમત ગ્રાન્ટ">રમત-ગમત ગ્રાન્ટ</option>
+                        <option value="લાઇબ્રેરી / પુસ્તક ગ્રાન્ટ">લાઇબ્રેરી / પુસ્તક ગ્રાન્ટ</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">વિગત / સામગ્રીનું નામ</label>
+                    <input type="text" id="voucherDesc" placeholder="દા.ત. વર્ગખંડ સ્ટેશનરી તથા ચાર્ટ પેપર્સ" required class="w-full p-2.5 border border-slate-300 rounded-xl">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">પ્રકાર</label>
+                        <select id="voucherType" class="w-full p-2.5 border border-slate-300 rounded-xl">
+                            <option value="expense">ખર્ચ (Expense)</option>
+                            <option value="income">આવક (Income)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">રકમ (₹)</label>
+                        <input type="number" id="voucherAmount" min="1" placeholder="દા.ત. 1500" required class="w-full p-2.5 border border-slate-300 rounded-xl font-mono">
+                    </div>
+                </div>
+                <div class="flex justify-end gap-2 pt-2 border-t border-slate-200">
+                    <button type="button" onclick="closeModal('addGrantModal')" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-xl">રદ કરો</button>
+                    <button type="submit" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow">સેવ કરો</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ======================= JAVASCRIPT APPLICATION CORE ======================= -->
+    <script>
+        // Automatic Gujarati Number & Date in Words Converter
+        const gujDays = [
+            "", "પહેલી", "બીજી", "ત્રીજી", "ચોથી", "પાંચમી", "છઠ્ઠી", "સાતમી", "આઠમી", "નવમી", "દસમી",
+            "અગિયારમી", "બારમી", "તેરમી", "ચૌદમી", "પંદરમી", "સોળમી", "સત્તરમી", "અઢારમી", "ઓગણીસમી", "વીસમી",
+            "એકવીસમી", "બાવીસમી", "તેવીસમી", "ચોવીસમી", "પચીસમી", "છવ્વીસમી", "સત્તાવીસમી", "અઠ્ઠાવીસમી", "ઓગણત્રીસમી", "ત્રીસમી", "એકત્રીસમી"
+        ];
+        const gujMonths = [
+            "", "જાન્યુઆરી", "ફેબ્રુઆરી", "માર્ચ", "એપ્રિલ", "મે", "જૂન",
+            "જુલાઈ", "ઓગસ્ટ", "સપ્ટેમ્બર", "ઓક્ટોબર", "નવેમ્બર", "ડિસેમ્બર"
+        ];
+        const gujYears = {
+            2008: "બે હજાર આઠ", 2009: "બે હજાર નવ", 2010: "બે હજાર દસ", 2011: "બે હજાર અગિયાર",
+            2012: "બે હજાર બાર", 2013: "બે હજાર તેર", 2014: "બે હજાર ચૌદ", 2015: "બે હજાર પંદર",
+            2016: "બે હજાર સોળ", 2017: "બે હજાર સત્તર", 2018: "બે હજાર અઢાર", 2019: "બે હજાર ઓગણીસ",
+            2020: "બે હજાર વીસ", 2021: "બે હજાર એકવીસ", 2022: "બે હજાર બાવીસ", 2023: "બે હજાર તેવીસ",
+            2024: "બે હજાર ચોવીસ", 2025: "બે હજાર પચીસ", 2026: "બે હજાર છવ્વીસ"
+        };
+
+        function getGujaratiDateWords(dateString) {
+            if (!dateString) return "";
+            const parts = dateString.split("-");
+            if (parts.length !== 3) return "";
+            const year = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const day = parseInt(parts[2], 10);
+
+            const dayWord = gujDays[day] || day + "મી";
+            const monthWord = gujMonths[month] || "";
+            const yearWord = gujYears[year] || year.toString();
+
+            return `${dayWord} ${monthWord} ${yearWord}`;
+        }
+
+        function convertDobToGujaratiWords(dateVal) {
+            const words = getGujaratiDateWords(dateVal);
+            document.getElementById('formDobWords').value = words;
+        }
+
+        // Pre-populated Sample Data (Realistic Gujarat Primary School context)
+        let students = [
+            {
+                grNo: 1402,
+                fullName: "પટેલ પ્રિયાંશુ મહેશભાઈ",
+                fatherName: "મહેશભાઈ બાબુભાઈ પટેલ",
+                motherName: "ભાવનાબેન પટેલ",
+                dob: "2015-06-12",
+                dobWords: "બારમી જૂન બે હજાર પંદર",
+                std: "૬",
+                gender: "કુમાર",
+                category: "સામાન્ય (General)",
+                uid: "240705001011500012",
+                marks: {
+                    gujarati: { form: 36, summ: 52 },
+                    maths: { form: 38, summ: 56 },
+                    science: { form: 35, summ: 54 },
+                    social: { form: 34, summ: 50 },
+                    english: { form: 32, summ: 48 },
+                    hindi: { form: 37, summ: 53 }
+                }
+            },
+            {
+                grNo: 1405,
+                fullName: "મકવાણા દિયા રાજેશભાઈ",
+                fatherName: "રાજેશભાઈ કાનજીભાઈ મકવાણા",
+                motherName: "રેખાબેન મકવાણા",
+                dob: "2016-09-24",
+                dobWords: "ચોવીસમી સપ્ટેમ્બર બે હજાર સોળ",
+                std: "૫",
+                gender: "કન્યા",
+                category: "ઓ.બી.સી. (SEBC)",
+                uid: "240705001011600045",
+                marks: {
+                    gujarati: { form: 39, summ: 58 },
+                    maths: { form: 37, summ: 55 },
+                    science: { form: 38, summ: 57 },
+                    social: { form: 36, summ: 54 },
+                    english: { form: 35, summ: 52 },
+                    hindi: { form: 38, summ: 56 }
+                }
+            },
+            {
+                grNo: 1410,
+                fullName: "પરમાર અર્જુન વિનોદભાઈ",
+                fatherName: "વિનોદભાઈ પ્રવીણભાઈ પરમાર",
+                motherName: "ગીતાબેન પરમાર",
+                dob: "2014-03-05",
+                dobWords: "પાંચમી માર્ચ બે હજાર ચૌદ",
+                std: "૭",
+                gender: "કુમાર",
+                category: "એસ.સી. (SC)",
+                uid: "240705001011400089",
+                marks: {
+                    gujarati: { form: 31, summ: 44 },
+                    maths: { form: 29, summ: 40 },
+                    science: { form: 32, summ: 45 },
+                    social: { form: 34, summ: 47 },
+                    english: { form: 28, summ: 39 },
+                    hindi: { form: 33, summ: 46 }
+                }
+            },
+            {
+                grNo: 1412,
+                fullName: "રાઠોડ ખુશી ભરતસિંહ",
+                fatherName: "ભરતસિંહ ચતુરસિંહ રાઠોડ",
+                motherName: "કંચનબા રાઠોડ",
+                dob: "2017-11-18",
+                dobWords: "અઢારમી નવેમ્બર બે હજાર સત્તર",
+                std: "૪",
+                gender: "કન્યા",
+                category: "સામાન્ય (General)",
+                uid: "240705001011700091",
+                marks: {
+                    gujarati: { form: 35, summ: 50 },
+                    maths: { form: 33, summ: 48 },
+                    science: { form: 34, summ: 51 },
+                    social: { form: 36, summ: 52 },
+                    english: { form: 31, summ: 44 },
+                    hindi: { form: 35, summ: 50 }
+                }
+            }
+        ];
+
+        let diaryList = [
+            {
+                date: "2026-10-20",
+                std: "ધોરણ ૬",
+                subject: "ગણિત - એકમ: ૭ અપૂર્ણાંક સંખ્યાઓ",
+                lo: "M604: વિદ્યાર્થીઓ અપૂર્ણાંકના સરવાળા સમજે છે.",
+                tlm: "સફરજન અને વર્તુળ આકારના કાગળ કટીંગ દ્વારા પ્રાયોગિક નિદર્શન.",
+                remark: "પાઠ્યપુસ્તક સ્વાધ્યાય ૭.૧ ના દાખલા વિદ્યાર્થીઓએ જાતે ગણ્યા."
+            },
+            {
+                date: "2026-10-19",
+                std: "ધોરણ ૭",
+                subject: "વિજ્ઞાન - એકમ: ૪ ઉષ્મા અને તાપમાન",
+                lo: "SC703: ક્લિનિકલ અને લેબોરેટરી થર્મોમીટરનો ઉપયોગ જાણે છે.",
+                tlm: "શાળા લેબ થર્મોમીટર, ગરમ પાણી અને બરફ.",
+                remark: "વિદ્યાર્થીઓએ પોતાના હાથ વડે તાપમાન નોંધવાની પ્રેક્ટિસ કરી."
+            }
+        ];
+
+        const staffMembers = [
+            { name: "પટેલ હિતેશકુમાર એમ.", role: "મુખ્ય શિક્ષક (આચાર્ય)", clTotal: 15, clUsed: 2, hplTotal: 20, hplUsed: 0 },
+            { name: "જોષી મીનાક્ષીબેન આર.", role: "ભાષા શિક્ષક", clTotal: 15, clUsed: 4, hplTotal: 20, hplUsed: 1 },
+            { name: "શાહ વિવેકકુમાર કે.", role: "ગણિત-વિજ્ઞાન શિક્ષક", clTotal: 15, clUsed: 3, hplTotal: 20, hplUsed: 2 },
+            { name: "દવે અલ્કેશકુમાર બી.", role: "સામાજિક વિજ્ઞાન શિક્ષક", clTotal: 15, clUsed: 1, hplTotal: 20, hplUsed: 0 }
+        ];
+
+        let leaves = [
+            { teacher: "જોષી મીનાક્ષીબેન આર. (સહશિક્ષક)", role: "સહશિક્ષક", type: "C.L. (કેઝ્યુઅલ)", date: "૧૮/૧૦/૨૦૨૬", days: 1, reason: "અંગત કામ અંગે", status: "મંજૂર" },
+            { teacher: "શાહ વિવેકકુમાર કે. (સહશિક્ષક)", role: "સહશિક્ષક", type: "H.P.L. (અર્ધપગારી)", date: "૧૨/૧૦/૨૦૨૬", days: 2, reason: "તબિયત અસ્વસ્થ હોવાથી", status: "મંજૂર" }
+        ];
+
+        let grantTransactions = [
+            { date: "2026-06-15", voucher: "IN-01", head: "SSA કમ્પોઝિટ ગ્રાન્ટ", desc: "વાર્ષિક શાળા ગ્રાન્ટ જમા", income: 25000, expense: 0, balance: 25000 },
+            { date: "2026-07-10", voucher: "V-26/01", head: "SSA કમ્પોઝિટ ગ્રાન્ટ", desc: "વર્ગખંડ રંગકામ અને પ્રાથમિક રિપેરિંગ", income: 0, expense: 6200, balance: 18800 },
+            { date: "2026-08-05", voucher: "IN-02", head: "રમત-ગમત ગ્રાન્ટ", desc: "વાર્ષિક સ્પોર્ટ્સ ગ્રાન્ટ જમા", income: 10000, expense: 0, balance: 28800 },
+            { date: "2026-08-20", voucher: "V-26/02", head: "રમત-ગમત ગ્રાન્ટ", desc: "વોલીબોલ, કેરમ બોર્ડ અને ચેસ ખરીદી", income: 0, expense: 4800, balance: 24000 },
+            { date: "2026-09-02", voucher: "IN-03", head: "લાઇબ્રેરી / પુસ્તક ગ્રાન્ટ", desc: "વાર્ષિક પુસ્તકાલય ગ્રાન્ટ જમા", income: 5000, expense: 0, balance: 29000 },
+            { date: "2026-09-18", voucher: "V-26/03", head: "લાઇબ્રેરી / પુસ્તક ગ્રાન્ટ", desc: "બાળસાહિત્ય અને જ્ઞાનકોશ પુસ્તકોની ખરીદી", income: 0, expense: 3200, balance: 25800 }
+        ];
+
+        // LocalStorage Sync
+        function loadStorage() {
+            try {
+                const s = localStorage.getItem('sarathi_students');
+                if (s) students = JSON.parse(s);
+
+                const d = localStorage.getItem('sarathi_diaries');
+                if (d) diaryList = JSON.parse(d);
+
+                const g = localStorage.getItem('sarathi_grants');
+                if (g) grantTransactions = JSON.parse(g);
+            } catch(e) {
+                console.warn("Storage load warning:", e);
+            }
+        }
+
+        function saveStorage() {
+            try {
+                localStorage.setItem('sarathi_students', JSON.stringify(students));
+                localStorage.setItem('sarathi_diaries', JSON.stringify(diaryList));
+                localStorage.setItem('sarathi_grants', JSON.stringify(grantTransactions));
+            } catch(e) {
+                console.warn("Storage save warning:", e);
+            }
+        }
+
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const selected = document.getElementById(`tab-${tabId}`);
+            if (selected) selected.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'shadow');
+                btn.classList.add('text-slate-300');
+            });
+
+            const activeBtn = Array.from(document.querySelectorAll('.nav-tab')).find(b => b.getAttribute('onclick')?.includes(tabId));
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-300');
+                activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow');
+            }
+
+            if (tabId === 'dashboard') updateDashboard();
+            if (tabId === 'grRegister') renderStudentsTable();
+            if (tabId === 'lcGenerator') populateLcDropdown();
+            if (tabId === 'sceMarksheet') populateMarksheetDropdown();
+            if (tabId === 'teacherDiary') renderDiary();
+            if (tabId === 'staffLeave') renderLeaves();
+            if (tabId === 'grantLedger') renderGrants();
+        }
+
+        // Modal Handlers
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        // Custom Notification (replaces alert)
+        function showMessage(msg) {
+            const old = document.getElementById('appNotificationToast');
+            if (old) old.remove();
+
+            const toast = document.createElement('div');
+            toast.id = 'appNotificationToast';
+            toast.className = 'fixed bottom-6 right-6 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl z-50 flex items-center gap-3 border border-slate-700 text-sm animate-bounce';
+            toast.innerHTML = `
+                <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+                <span>${msg}</span>
+                <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-white ml-2 text-lg">&times;</button>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => { if (toast) toast.remove(); }, 4000);
+        }
+
+        // Custom Confirm Dialog (replaces confirm)
+        function showConfirmDialog(msg, onConfirm) {
+            const old = document.getElementById('appConfirmModal');
+            if (old) old.remove();
+
+            const modal = document.createElement('div');
+            modal.id = 'appConfirmModal';
+            modal.className = 'fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm';
+            modal.innerHTML = `
+                <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4">
+                    <div class="flex items-center gap-3 text-amber-600">
+                        <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+                        <h4 class="font-bold text-slate-900 text-base">ખાતરી કરો</h4>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">${msg}</p>
+                    <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
+                        <button id="btnCancelConfirm" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-xl text-sm font-semibold">રદ કરો</button>
+                        <button id="btnProceedConfirm" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-sm shadow">હા, રદ કરો</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            document.getElementById('btnCancelConfirm').onclick = () => modal.remove();
+            document.getElementById('btnProceedConfirm').onclick = () => {
+                modal.remove();
+                if (typeof onConfirm === 'function') onConfirm();
+            };
+        }
+
+        // ======================= MODULE 2: G.R. REGISTER =======================
+        function renderStudentsTable(studentList = students) {
+            const tbody = document.getElementById('grTableBody');
+            const noData = document.getElementById('noStudentFound');
+            tbody.innerHTML = '';
+
+            if (studentList.length === 0) {
+                noData.classList.remove('hidden');
+                return;
+            } else {
+                noData.classList.add('hidden');
+            }
+
+            studentList.forEach(st => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
+                tr.innerHTML = `
+                    <td class="p-3.5 font-bold font-mono text-blue-900">${st.grNo}</td>
+                    <td class="p-3.5">
+                        <div class="font-bold text-slate-900">${st.fullName}</div>
+                        <div class="text-[11px] text-slate-500">જાતિ: ${st.gender}</div>
+                    </td>
+                    <td class="p-3.5 text-xs text-slate-700">
+                        <div>પિતા: ${st.fatherName}</div>
+                        <div>માતા: ${st.motherName}</div>
+                    </td>
+                    <td class="p-3.5">
+                        <span class="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-800 text-xs font-bold rounded-full">ધોરણ ${st.std}</span>
+                    </td>
+                    <td class="p-3.5">
+                        <div class="font-mono text-xs font-semibold text-slate-800">${st.dob}</div>
+                        <div class="text-[11px] text-amber-800 font-medium">${st.dobWords}</div>
+                    </td>
+                    <td class="p-3.5 text-xs">${st.category}</td>
+                    <td class="p-3.5 font-mono text-xs text-slate-600">${st.uid || '---'}</td>
+                    <td class="p-3.5 text-center">
+                        <div class="flex items-center justify-center gap-1.5">
+                            <button onclick="previewStudentLC(${st.grNo})" title="L.C. બનાવો" class="text-amber-600 hover:text-amber-800 p-2 rounded-lg hover:bg-amber-50">
+                                <i class="fa-solid fa-certificate"></i>
+                            </button>
+                            <button onclick="previewStudentMarks(${st.grNo})" title="ગુણપત્રક જુઓ" class="text-emerald-600 hover:text-emerald-800 p-2 rounded-lg hover:bg-emerald-50">
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </button>
+                            <button onclick="deleteStudent(${st.grNo})" title="કાઢી નાખો" class="text-rose-600 hover:text-rose-800 p-2 rounded-lg hover:bg-rose-50">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('statTotalStudents').innerText = students.length;
+        }
+
+        function filterStudents() {
+            const query = document.getElementById('searchGrInput').value.toLowerCase().trim();
+            const std = document.getElementById('filterStdSelect').value;
+
+            const filtered = students.filter(st => {
+                const matchQuery = st.fullName.toLowerCase().includes(query) ||
+                                   st.grNo.toString().includes(query) ||
+                                   (st.uid && st.uid.includes(query));
+                const matchStd = std ? st.std === std : true;
+                return matchQuery && matchStd;
+            });
+
+            renderStudentsTable(filtered);
+        }
+
+        function handleSaveStudent(e) {
+            e.preventDefault();
+            const grNo = parseInt(document.getElementById('formGrNo').value, 10);
+            
+            if (students.some(s => s.grNo === grNo)) {
+                showMessage("આ G.R. નંબર ધરાવતો વિદ્યાર્થી પહેલેથી અસ્તિત્વમાં છે!");
+                return;
+            }
+
+            const newStudent = {
+                grNo: grNo,
+                fullName: document.getElementById('formFullName').value.trim(),
+                fatherName: document.getElementById('formFatherName').value.trim(),
+                motherName: document.getElementById('formMotherName').value.trim(),
+                dob: document.getElementById('formDob').value,
+                dobWords: document.getElementById('formDobWords').value,
+                std: document.getElementById('formStd').value,
+                gender: document.getElementById('formGender').value,
+                category: document.getElementById('formCategory').value,
+                uid: document.getElementById('formUid').value.trim(),
+                marks: {
+                    gujarati: { form: 34, summ: 50 },
+                    maths: { form: 35, summ: 52 },
+                    science: { form: 32, summ: 48 },
+                    social: { form: 36, summ: 51 },
+                    english: { form: 30, summ: 45 },
+                    hindi: { form: 33, summ: 49 }
+                }
+            };
+
+            students.unshift(newStudent);
+            saveStorage();
+            renderStudentsTable();
+            updateDashboard();
+            closeModal('addStudentModal');
+            document.getElementById('studentForm').reset();
+            showMessage("નવો વિદ્યાર્થી G.R. રજિસ્ટરમાં સેવ થયો!");
+        }
+
+        function deleteStudent(grNo) {
+            showConfirmDialog(`શું તમે ખરેખર G.R. નંબર ${grNo} નો રેકોર્ડ રદ કરવા માંગો છો?`, () => {
+                students = students.filter(s => s.grNo !== grNo);
+                saveStorage();
+                renderStudentsTable();
+                updateDashboard();
+                showMessage("વિદ્યાર્થી રેકોર્ડ સફળતાપૂર્વક રદ કરવામાં આવ્યો.");
+            });
+        }
+
+        // ======================= MODULE 3: L.C. GENERATOR =======================
+        function populateLcDropdown() {
+            const select = document.getElementById('selectStudentForLC');
+            select.innerHTML = '<option value="">વિદ્યાર્થી પસંદ કરો (G.R. નં.)...</option>';
+            students.forEach(st => {
+                const opt = document.createElement('option');
+                opt.value = st.grNo;
+                opt.innerText = `${st.grNo} - ${st.fullName} (ધોરણ ${st.std})`;
+                select.appendChild(opt);
+            });
+        }
+
+        function loadStudentLC(grNo) {
+            if (!grNo) return;
+            const st = students.find(s => s.grNo === parseInt(grNo, 10));
+            if (!st) return;
+
+            document.getElementById('lcGrNo').innerText = st.grNo;
+            document.getElementById('lcCertNo').innerText = `LC/2026/${st.grNo}`;
+            document.getElementById('lcUid').innerText = st.uid || '24070500101' + st.grNo;
+            document.getElementById('lcFullName').innerText = st.fullName;
+            document.getElementById('lcFatherName').innerText = st.fatherName;
+            document.getElementById('lcMotherName').innerText = st.motherName;
+            document.getElementById('lcCategory').innerText = `ભારતીય - ${st.category}`;
+            document.getElementById('lcDobDigit').innerText = st.dob;
+            document.getElementById('lcDobWords').innerText = st.dobWords;
+            document.getElementById('lcLeavingStd').innerText = `ધોરણ ${st.std} (${getStdWord(st.std)}) માં ઉત્તીર્ણ`;
+
+            const today = new Date().toLocaleDateString('gu-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+            document.getElementById('lcIssueDate').innerText = today;
+        }
+
+        function previewStudentLC(grNo) {
+            switchTab('lcGenerator');
+            document.getElementById('selectStudentForLC').value = grNo;
+            loadStudentLC(grNo);
+        }
+
+        function getStdWord(std) {
+            const words = { "1": "એક", "2": "બે", "3": "ત્રણ", "4": "ચાર", "5": "પાંચ", "6": "છ", "7": "સાત", "8": "આઠ" };
+            return words[std] || std;
+        }
+
+        // ======================= MODULE 4: SCE MARKSHEET =======================
+        const subjectsConfig = [
+            { id: 'gujarati', name: 'ગુજરાતી (પ્રથમ ભાષા)' },
+            { id: 'maths', name: 'ગણિત (Mathematics)' },
+            { id: 'science', name: 'વિજ્ઞાન અને ટેકનોલોજી' },
+            { id: 'social', name: 'સામાજિક વિજ્ઞાન' },
+            { id: 'english', name: 'અંગ્રેજી (દ્વિતીય ભાષા)' },
+            { id: 'hindi', name: 'હિન્દી' }
+        ];
+
+        function populateMarksheetDropdown() {
+            const select = document.getElementById('marksheetStudentSelect');
+            select.innerHTML = '<option value="">વિદ્યાર્થી પસંદ કરો...</option>';
+            students.forEach(st => {
+                const opt = document.createElement('option');
+                opt.value = st.grNo;
+                opt.innerText = `${st.grNo} - ${st.fullName} (ધોરણ ${st.std})`;
+                select.appendChild(opt);
+            });
+        }
+
+        function calculateGujaratGrade(percentage) {
+            if (percentage >= 91) return "A1 (ઉત્કૃષ્ટ)";
+            if (percentage >= 81) return "A2 (શ્રેષ્ઠ)";
+            if (percentage >= 71) return "B1 (ખૂબ સારું)";
+            if (percentage >= 61) return "B2 (સારું)";
+            if (percentage >= 51) return "C1 (મધ્યમ)";
+            if (percentage >= 41) return "C2 (સંતોષકારક)";
+            if (percentage >= 33) return "D (સામાન્ય)";
+            return "E (સુધારણા જરૂરી)";
+        }
+
+        function loadStudentMarksheet(grNo) {
+            if (!grNo) return;
+            const st = students.find(s => s.grNo === parseInt(grNo, 10));
+            if (!st) return;
+
+            document.getElementById('cardStudentName').innerText = st.fullName;
+            document.getElementById('cardGrNo').innerText = st.grNo;
+            document.getElementById('cardStd').innerText = `ધોરણ ${st.std} - વર્ગ અ`;
+
+            const tbody = document.getElementById('marksheetTableBody');
+            tbody.innerHTML = '';
+
+            let totalFormative = 0;
+            let totalSummative = 0;
+
+            subjectsConfig.forEach(sub => {
+                const marks = (st.marks && st.marks[sub.id]) ? st.marks[sub.id] : { form: 35, summ: 50 };
+                const subTotal = marks.form + marks.summ;
+                const grade = calculateGujaratGrade(subTotal).split(" ")[0];
+
+                totalFormative += marks.form;
+                totalSummative += marks.summ;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="border border-slate-400 p-2 text-left font-medium">${sub.name}</td>
+                    <td class="border border-slate-400 p-2 font-mono">${marks.form}</td>
+                    <td class="border border-slate-400 p-2 font-mono">${marks.summ}</td>
+                    <td class="border border-slate-400 p-2 font-bold font-mono text-slate-900">${subTotal}</td>
+                    <td class="border border-slate-400 p-2 font-bold font-mono ${grade.startsWith('A') ? 'text-emerald-700' : 'text-blue-700'}">${grade}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const grand = totalFormative + totalSummative;
+            const percent = ((grand / 600) * 100).toFixed(1);
+            document.getElementById('sumFormative').innerText = totalFormative;
+            document.getElementById('sumSummative').innerText = totalSummative;
+            document.getElementById('grandTotalMarks').innerText = `${grand} / 600 (${percent}%)`;
+            document.getElementById('finalGrade').innerText = calculateGujaratGrade(percent);
+        }
+
+        function previewStudentMarks(grNo) {
+            switchTab('sceMarksheet');
+            document.getElementById('marksheetStudentSelect').value = grNo;
+            loadStudentMarksheet(grNo);
+        }
+
+        // ======================= MODULE 5: TEACHER'S DIARY =======================
+        function renderDiary() {
+            const container = document.getElementById('diaryEntriesContainer');
+            container.innerHTML = '';
+
+            diaryList.forEach(d => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2";
+                card.innerHTML = `
+                    <div class="flex justify-between items-start border-b border-slate-100 pb-2">
+                        <div>
+                            <span class="text-xs bg-purple-100 text-purple-800 font-bold px-2.5 py-0.5 rounded-full">${d.std}</span>
+                            <h4 class="font-bold text-slate-900 mt-1">${d.subject}</h4>
+                        </div>
+                        <span class="text-xs text-slate-400 font-mono">${d.date}</span>
+                    </div>
+                    <div class="text-xs space-y-1.5 text-slate-600 leading-relaxed">
+                        <p><strong class="text-slate-800">અધ્યયન નિષ્પત્તિ:</strong> ${d.lo}</p>
+                        <p><strong class="text-slate-800">સાધન / TLM:</strong> ${d.tlm}</p>
+                        <p><strong class="text-slate-800">નોંધ / ગૃહકાર્ય:</strong> ${d.remark}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function handleSaveDiary(e) {
+            e.preventDefault();
+            const newDiary = {
+                date: document.getElementById('diaryDate').value,
+                std: document.getElementById('diaryStd').value,
+                subject: document.getElementById('diarySubject').value,
+                lo: document.getElementById('diaryLo').value,
+                tlm: document.getElementById('diaryTlm').value,
+                remark: document.getElementById('diaryRemark').value
+            };
+            diaryList.unshift(newDiary);
+            saveStorage();
+            renderDiary();
+            closeModal('addDiaryModal');
+            document.getElementById('diaryForm').reset();
+            showMessage("શિક્ષક ડાયરી નોંધ સફળતાપૂર્વક ઉમેરાઈ ગઈ!");
+        }
+
+        // ======================= MODULE 6: LEAVE REGISTER =======================
+        function renderLeaves() {
+            const cardsContainer = document.getElementById('staffBalanceCards');
+            cardsContainer.innerHTML = '';
+
+            staffMembers.forEach(stf => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-4 rounded-2xl border border-slate-200 shadow-sm";
+                card.innerHTML = `
+                    <div class="font-bold text-slate-900 text-sm">${stf.name}</div>
+                    <div class="text-xs text-slate-500 mb-3">${stf.role}</div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="p-2 bg-blue-50 rounded-xl border border-blue-100">
+                            <span class="text-slate-500 block">C.L. બેલેન્સ:</span>
+                            <span class="font-bold text-blue-900 font-mono text-base">${stf.clTotal - stf.clUsed} / ${stf.clTotal}</span>
+                        </div>
+                        <div class="p-2 bg-emerald-50 rounded-xl border border-emerald-100">
+                            <span class="text-slate-500 block">H.P.L. બેલેન્સ:</span>
+                            <span class="font-bold text-emerald-900 font-mono text-base">${stf.hplTotal - stf.hplUsed} / ${stf.hplTotal}</span>
+                        </div>
+                    </div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+
+            const tbody = document.getElementById('leaveHistoryTable');
+            tbody.innerHTML = '';
+            leaves.forEach(l => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-slate-100";
+                tr.innerHTML = `
+                    <td class="p-3 font-semibold text-slate-900">${l.teacher}</td>
+                    <td class="p-3 text-xs text-slate-500">${l.role}</td>
+                    <td class="p-3 text-xs font-bold text-rose-700">${l.type}</td>
+                    <td class="p-3 text-xs font-mono">${l.date}</td>
+                    <td class="p-3 text-xs font-bold font-mono">${l.days} દિવસ</td>
+                    <td class="p-3 text-xs">${l.reason}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">${l.status}</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function handleSaveLeave(e) {
+            e.preventDefault();
+            const teacher = document.getElementById('leaveTeacherName').value;
+            const type = document.getElementById('leaveType').value;
+            const days = parseInt(document.getElementById('leaveDays').value, 10);
+            const date = document.getElementById('leaveStartDate').value;
+            const reason = document.getElementById('leaveReason').value;
+
+            leaves.unshift({
+                teacher: teacher,
+                role: "શિક્ષક",
+                type: type,
+                date: date,
+                days: days,
+                reason: reason,
+                status: "મંજૂર"
+            });
+
+            renderLeaves();
+            closeModal('addLeaveModal');
+            document.getElementById('leaveForm').reset();
+            showMessage("રજા અરજી રજિસ્ટરમાં નોંધાઈ ગઈ!");
+        }
+
+        // ======================= MODULE 7: AI & DRAFTING =======================
+        const draftTemplates = {
+            smc: `<strong>શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</strong><br>
+<strong>શાળા વ્યવસ્થાપન સમિતિ (SMC) માસિક બેઠક ઠરાવ નકલ</strong><br><br>
+આજ રોજ તારીખ: ૨૫/૧૦/૨૦૨૬ ના દિને શાળા પરિસરમાં SMC અધ્યક્ષશ્રીની અધ્યક્ષતામાં અને આચાર્યશ્રીની ઉપસ્થિતિમાં માસિક સમીક્ષા બેઠક યોજવામાં આવી.<br><br>
+<strong>ઠરાવ ક્રમાંક ૧:</strong> ગત માસની કાર્યવાહી અને શૈક્ષણિક પ્રગતિની સમીક્ષા કરી સર્વાનુમતે બહાલી આપવામાં આવી.<br>
+<strong>ઠરાવ ક્રમાંક ૨:</strong> સમગ્ર શિક્ષા અભિયાન (SSA) કમ્પોઝિટ ગ્રાન્ટમાંથી શાળાના વર્ગખંડોમાં વ્હાઇટ બોર્ડ અને શૈક્ષણિક ચાર્ટ્સ વસાવવા અંગે સર્વાનુમતે મંજૂરી આપવામાં આવી.<br>
+<strong>ઠરાવ ક્રમાંક ૩:</strong> નબળા વિદ્યાર્થીઓ માટે ગણિત-વાંચનમાં દૈનિક ૩૦ મિનિટ ઉપચારાત્મક શિક્ષણ સત્ર શરૂ કરવાનું નક્કી કરાયું.<br><br>
+<strong>સહીઓ:</strong><br>
+૧. SMC અધ્યક્ષશ્રી: ____________________<br>
+૨. આચાર્ય / સચિવશ્રી: ____________________<br>
+૩. સભ્યશ્રી (વાલી પ્રતિનિધિ): ____________________`,
+
+            bonafide: `<strong>શ્રી તાલુકા પ્રાથમિક શાળા - કેન્દ્રશાળા</strong><br>
+તા. ધંધૂકા, જિ. અમદાવાદ | U-DISE કોડ: 24070500101<br><br>
+<center><strong><u>બોનાફાઇડ સર્ટિફિકેટ (BONAFIDE CERTIFICATE)</u></strong></center><br>
+પ્રમાણિત કરવામાં આવે છે કે કુમાર/કન્યા <strong>પટેલ પ્રિયાંશુ મહેશભાઈ</strong>, જનરલ રજિસ્ટર (G.R.) નંબર <strong>૧૪૦૨</strong> થી અમારી શાળામાં ચાલુ શૈક્ષણિક વર્ષ ૨૦૨૬-૨૭ માં <strong>ધોરણ ૬ (છ)</strong> માં નિયમિત અભ્યાસ કરે છે.<br><br>
+તેમની શાળા રેકોર્ડ મુજબ જન્મતારીખ <strong>૧૨/૦૬/૨૦૧૫ (બારમી જૂન બે હજાર પંદર)</strong> છે.<br>
+શાળામાં તેમની વર્તણૂક ઘણી સારી છે. આ પ્રમાણપત્ર વાલીની વિનંતીથી સરકારી યોજના / શિષ્યવૃત્તિ અર્થે કાઢી આપવામાં આવેલ છે.<br><br>
+તારીખ: ૨૧/૧૦/૨૦૨૬<br>
+સ્થળ: ધંધૂકા<br><br>
+<div style="text-align: right; margin-top: 25px;">
+    <strong>આચાર્યશ્રીની સહી અને સિક્કો</strong>
+</div>`,
+
+            tour: `પ્રતિ,<br>
+તાલુકા પ્રાથમિક શિક્ષણાધિકારીશ્રી (TPEO),<br>
+તાલુકા પંચાયત કચેરી, ધંધૂકા.<br><br>
+<strong>વિષય:</strong> એક-દિવસીય શૈક્ષણિક પ્રવાસ મંજૂરી બાબત.<br><br>
+માનનીય સાહેબશ્રી,<br>
+સવિનય જણાવવાનું કે અમારી શાળાના ધોરણ ૬ થી ૮ ના કુલ ૫૦ વિદ્યાર્થીઓ માટે શૈક્ષણિક હેતુસર આગામી તારીખ <strong>૧૫/૧૧/૨૦૨૬</strong> ના રોજ 'ગુજરાત સાયન્સ સિટી અને લોથલ હડપ્પીય સંસ્કૃતિ સંગ્રહાલય' ખાતે એક-દિવસીય શૈક્ષણિક પ્રવાસનું આયોજન કરવામાં આવેલ છે.<br><br>
+પ્રવાસમાં ભાગ લેનાર તમામ વિદ્યાર્થીઓના વાલીઓના સંમતિપત્રો મેળવેલ છે તેમજ શાળાના ૪ શિક્ષકો માર્ગદર્શક તરીકે ઉપસ્થિત રહેશે. તો આ પ્રવાસ માટે નિયમાનુસાર વહીવટી મંજૂરી આપવા નમ્ર વિનંતી છે.<br><br>
+આપનો વિશ્વાસુ,<br>
+<strong>આચાર્યશ્રી, શ્રી તાલુકા પ્રાથમિક શાળા</strong>`,
+
+            leaveApp: `પ્રતિ,<br>
+માનનીય આચાર્યશ્રી,<br>
+શ્રી તાલુકા પ્રાથમિક શાળા, ધંધૂકા.<br><br>
+<strong>વિષય:</strong> કેઝ્યુઅલ લીવ (C.L.) મંજૂર કરવા બાબત.<br><br>
+માનનીય સાહેબશ્રી,<br>
+સવિનય જણાવવાનું કે મારે આગામી તારીખ <strong>૨૪/૧૦/૨૦૨૬</strong> ના રોજ પરિવારમાં સામાજિક પ્રસંગ હોવાથી શાળા સમય દરમિયાન ઉપસ્થિત રહી શકાય તેમ નથી. માટે મારી ૧ (એક) દિવસની C.L. રજા મંજૂર કરવા વિનંતી છે.<br><br>
+મારા વર્ગનું શૈક્ષણિક કાર્ય અન્ય સહશિક્ષકશ્રીને સોંપવામાં આવેલ છે.<br><br>
+આપનો સહકર્મચારી,<br>
+<strong>શાહ વિવેકકુમાર કે. (સહશિક્ષક)</strong>`
+        };
+
+        function applyDraftTemplate(type) {
+            document.getElementById('draftDocumentEditor').innerHTML = draftTemplates[type] || "";
+        }
+
+        async function generateLetterWithGemini() {
+            const prompt = document.getElementById('aiDraftPrompt').value.trim();
+            if (!prompt) {
+                showMessage("કૃપા કરીને પત્રનો વિષય કે વિગત દાખલ કરો.");
+                return;
+            }
+
+            const btn = document.getElementById('btnGenerateAi');
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ડ્રાફ્ટ થઈ રહ્યું છે...`;
+            btn.disabled = true;
+
+            const apiKey = ""; // Runtime provides key automatically when left empty
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+            const systemPrompt = "તમે ગુજરાત સરકારના પ્રાથમિક શિક્ષણ વિભાગના અનુભવી આચાર્ય અને વહીવટી નિષ્ણાત છો. આપેલ વિષય પર શુદ્ધ, સત્તાવાર ગુજરાતીમાં સચોટ અરજી, પરિપત્ર અથવા ઠરાવ ડ્રાફ્ટ કરી આપો. માત્ર HTML ફોર્મેટમાં (br, p, strong, center ટેગ્સ સાથે) સ્વચ્છ લખાણ આપો.";
+
+            const payload = {
+                contents: [{ parts: [{ text: `નીચેના વિષય પર ગુજરાત પ્રાથમિક શાળા માટે સત્તાવાર ગુજરાતી પત્ર ડ્રાફ્ટ કરો:\n${prompt}` }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) {
+                    document.getElementById('draftDocumentEditor').innerHTML = text.replace(/```html/g, '').replace(/```/g, '');
+                } else {
+                    showMessage("પત્ર જનરેટ કરવામાં તકલીફ થઈ. ફરી પ્રયાસ કરો.");
+                }
+            } catch (err) {
+                console.error("Gemini Error:", err);
+                showMessage("કનેક્શન ત્રુટિ. ઓફલાઇન ટેમ્પલેટ પસંદ કરો.");
+            } finally {
+                btn.innerHTML = `<i class="fa-solid fa-bolt text-amber-400"></i> સત્તાવાર ગુજરાતી પત્ર બનાવો`;
+                btn.disabled = false;
+            }
+        }
+
+        function copyDraftToClipboard() {
+            const editor = document.getElementById('draftDocumentEditor');
+            const range = document.createRange();
+            range.selectNodeContents(editor);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            document.execCommand('copy');
+            selection.removeAllRanges();
+            showMessage("લખાણ ક્લિપબોર્ડમાં કોપી થઈ ગયું!");
+        }
+
+        function printCustomDocument() {
+            const content = document.getElementById('draftDocumentEditor').innerHTML;
+            const printWindow = window.open('', '', 'height=700,width=900');
+            printWindow.document.write(`
+                <html lang="gu">
+                <head>
+                    <title>સત્તાવાર પત્ર પ્રિન્ટ</title>
+                    <style>
+                        body { font-family: 'Noto Sans Gujarati', sans-serif; padding: 40px; line-height: 1.8; color: #111; font-size: 15px; }
+                        strong { font-weight: 700; }
+                    </style>
+                </head>
+                <body>
+                    ${content}
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.focus();
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 500);
+        }
+
+        // ======================= MODULE 8: GRANT & EXPENSE LEDGER =======================
+        function renderGrants() {
+            const cardsContainer = document.getElementById('grantHeadCards');
+            cardsContainer.innerHTML = '';
+
+            const heads = [
+                { name: "SSA કમ્પોઝિટ ગ્રાન્ટ", bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-900" },
+                { name: "રમત-ગમત ગ્રાન્ટ", bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-900" },
+                { name: "લાઇબ્રેરી / પુસ્તક ગ્રાન્ટ", bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-900" }
+            ];
+
+            heads.forEach(h => {
+                const headTransactions = grantTransactions.filter(t => t.head === h.name);
+                const inc = headTransactions.reduce((acc, curr) => acc + (curr.income || 0), 0);
+                const exp = headTransactions.reduce((acc, curr) => acc + (curr.expense || 0), 0);
+                const bal = inc - exp;
+
+                const card = document.createElement('div');
+                card.className = `${h.bg} p-4 rounded-2xl border ${h.border} shadow-sm`;
+                card.innerHTML = `
+                    <div class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">${h.name}</div>
+                    <div class="text-2xl font-extrabold ${h.text} font-mono">₹ ${bal.toLocaleString('en-IN')}</div>
+                    <div class="flex justify-between text-[11px] text-slate-500 mt-2 font-mono">
+                        <span>આવક: ₹${inc}</span>
+                        <span>ખર્ચ: ₹${exp}</span>
+                    </div>
+                `;
+                cardsContainer.appendChild(card);
+            });
+
+            const tbody = document.getElementById('grantLedgerTableBody');
+            tbody.innerHTML = '';
+
+            let runningBal = 0;
+            grantTransactions.forEach(t => {
+                runningBal += (t.income - t.expense);
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-slate-100 hover:bg-slate-50";
+                tr.innerHTML = `
+                    <td class="p-3 font-mono text-xs">${t.date}</td>
+                    <td class="p-3 font-mono text-xs font-bold text-slate-800">${t.voucher}</td>
+                    <td class="p-3 text-xs font-semibold text-slate-900">${t.head}</td>
+                    <td class="p-3 text-xs text-slate-700">${t.desc}</td>
+                    <td class="p-3 text-xs font-mono font-semibold text-emerald-700">${t.income ? '₹ ' + t.income : '-'}</td>
+                    <td class="p-3 text-xs font-mono font-semibold text-rose-700">${t.expense ? '₹ ' + t.expense : '-'}</td>
+                    <td class="p-3 text-xs font-mono font-bold text-blue-900">₹ ${runningBal}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('statGrantBalance').innerText = `₹ ${runningBal.toLocaleString('en-IN')}`;
+        }
+
+        function handleSaveGrantVoucher(e) {
+            e.preventDefault();
+            const date = document.getElementById('voucherDate').value;
+            const voucher = document.getElementById('voucherNo').value;
+            const head = document.getElementById('voucherHead').value;
+            const desc = document.getElementById('voucherDesc').value;
+            const type = document.getElementById('voucherType').value;
+            const amount = parseInt(document.getElementById('voucherAmount').value, 10);
+
+            const isInc = type === 'income';
+            grantTransactions.push({
+                date: date,
+                voucher: voucher,
+                head: head,
+                desc: desc,
+                income: isInc ? amount : 0,
+                expense: isInc ? 0 : amount,
+                balance: 0
+            });
+
+            saveStorage();
+            renderGrants();
+            closeModal('addGrantModal');
+            document.getElementById('grantForm').reset();
+            showMessage("ગ્રાન્ટ વાઉચર સફળતાપૂર્વક નોંધાઈ ગયું!");
+        }
+
+        // ======================= DASHBOARD HELPER =======================
+        function updateDashboard() {
+            document.getElementById('statTotalStudents').innerText = students.length;
+
+            // Class-wise counts (Std 1 to 8)
+            const classCounts = { "1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0 };
+            students.forEach(s => {
+                if (classCounts[s.std] !== undefined) classCounts[s.std]++;
+            });
+
+            const classGrid = document.getElementById('classDistributionGrid');
+            classGrid.innerHTML = '';
+            for (let i = 1; i <= 8; i++) {
+                const box = document.createElement('div');
+                box.className = "p-2.5 bg-slate-50 rounded-xl border border-slate-200";
+                box.innerHTML = `
+                    <span class="text-slate-500 font-medium block">ધો. ${i}</span>
+                    <span class="font-bold text-blue-900 text-sm font-mono">${classCounts[i.toString()]}</span>
+                `;
+                classGrid.appendChild(box);
+            }
+
+            // Recent Students Table
+            const recentTbody = document.getElementById('dashboardRecentTable');
+            recentTbody.innerHTML = '';
+            students.slice(0, 5).forEach(st => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-3 font-mono font-bold text-blue-900">${st.grNo}</td>
+                    <td class="p-3 font-medium text-slate-900">${st.fullName}</td>
+                    <td class="p-3 text-xs text-slate-600">${st.fatherName}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 bg-slate-100 font-bold rounded text-xs">ધોરણ ${st.std}</span></td>
+                    <td class="p-3 text-xs text-amber-800">${st.dobWords}</td>
+                    <td class="p-3 text-right">
+                        <button onclick="previewStudentLC(${st.grNo})" class="text-xs text-blue-600 font-bold hover:underline">L.C. બનાવો</button>
+                    </td>
+                `;
+                recentTbody.appendChild(tr);
+            });
+        }
+
+        // App Initializer
+        window.onload = function() {
+            loadStorage();
+            renderStudentsTable();
+            updateDashboard();
+            applyDraftTemplate('smc');
+
+            const now = new Date();
+            const gujMonthNames = ["જાન્યુઆરી", "ફેબ્રુઆરી", "માર્ચ", "એપ્રિલ", "મે", "જૂન", "જુલાઈ", "ઓગસ્ટ", "સપ્ટેમ્બર", "ઓક્ટોબર", "નવેમ્બર", "ડિસેમ્બર"];
+            const dateStr = `${now.getDate()} ${gujMonthNames[now.getMonth()]}, ${now.getFullYear()}`;
+            document.getElementById('currentDateGujarati').innerText = dateStr;
+
+            if (students.length > 0) {
+                loadStudentLC(students[0].grNo);
+                loadStudentMarksheet(students[0].grNo);
+            }
+        };
+    </script>
+</body>
+</html>
+```
